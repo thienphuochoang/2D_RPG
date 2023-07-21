@@ -10,6 +10,10 @@ public class Player : Entity
     public PlayerMoveState moveState { get; private set; }
     public PlayerAirState airState { get; private set; }
     public PlayerJumpState jumpState { get; private set; }
+    public PlayerWallSlideState wallSlideState { get; private set; }
+    public PlayerWallJumpState wallJumpState { get; private set; }
+    public PlayerPrimaryAttackState primaryAttackState { get; private set; }
+    public bool isBusy { get; private set; }
 
     [Header("Move info")]
     public float moveSpeed = 7f;
@@ -17,11 +21,7 @@ public class Player : Entity
     
 
     [Header("Attack info")]
-    [SerializeField]
-    private float comboTime = 1f;
-    private bool _isAttacking = false;
-    private int _comboCounter;
-    private float _comboTimeCounter;
+    public Vector2[] attackOffsetMovement;
 
     private void Awake()
     {
@@ -30,6 +30,9 @@ public class Player : Entity
         moveState = new PlayerMoveState(this, stateMachine, "Move");
         airState = new PlayerAirState(this, stateMachine, "Jump");
         jumpState = new PlayerJumpState(this, stateMachine, "Jump");
+        wallSlideState = new PlayerWallSlideState(this, stateMachine, "WallSlide");
+        wallJumpState = new PlayerWallJumpState(this, stateMachine, "Jump");
+        primaryAttackState = new PlayerPrimaryAttackState(this, stateMachine, "Attack");
     }
 
     protected override void Start()
@@ -44,9 +47,18 @@ public class Player : Entity
         stateMachine.currentState.UpdateState();
     }
 
+    public IEnumerator BusyFor(float seconds)
+    {
+        isBusy = true;
+        yield return new WaitForSeconds(seconds);
+        isBusy = false;
+    }
+
+    public void TriggerAnimation() => stateMachine.currentState.FinishAnimationTrigger();
+    public void ResetZeroVelocity() => rb.velocity = Vector2.zero;
     public void SetVelocity(float xVelocity, float yVelocity)
     {
-        rigidbody2D.velocity = new Vector2(xVelocity, yVelocity);
+        rb.velocity = new Vector2(xVelocity, yVelocity);
         ControlFlip(xVelocity);
     }
     /*protected override void Start()

@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 public class Entity : MonoBehaviour
 {
-    public Rigidbody2D rigidbody2D { get; private set; }
+    public Rigidbody2D rb { get; private set; }
     public Animator animator { get; private set; }
 
     public int facingDirection { get; private set; } = 1;
@@ -28,12 +28,12 @@ public class Entity : MonoBehaviour
     
     
     public bool IsGroundedDetected() =>Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayerMask);
-    public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right, wallCheckDistance * facingDirection, groundLayerMask);
+    public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, groundLayerMask);
     
     protected virtual void Start()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        rb = GetComponentInChildren<Rigidbody2D>();
+        animator = GetComponentInChildren<Animator>();
         if (wallCheck == null)
             wallCheck = this.transform;
     }

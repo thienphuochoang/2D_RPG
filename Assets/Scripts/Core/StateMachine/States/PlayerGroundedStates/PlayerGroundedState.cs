@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
 public class PlayerGroundedState : PlayerState
@@ -15,6 +16,8 @@ public class PlayerGroundedState : PlayerState
     public override void UpdateState()
     {
         base.UpdateState();
+        if (Input.GetKey(KeyCode.Mouse0))
+            stateMachine.ChangeState(player.primaryAttackState);
         if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundedDetected())
             stateMachine.ChangeState(player.jumpState);
     }

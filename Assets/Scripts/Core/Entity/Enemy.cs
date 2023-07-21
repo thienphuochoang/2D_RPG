@@ -25,7 +25,7 @@ public class Enemy : Entity
         {
             if (_isPlayerDetected.distance > 1)
             {
-                rigidbody2D.velocity = new Vector2(moveSpeed * (moveSpeed + 0.5f) * facingDirection, rigidbody2D.velocity.y);
+                rb.velocity = new Vector2(moveSpeed * (moveSpeed + 0.5f) * facingDirection, rb.velocity.y);
                 Debug.Log("I see the player");
                 _isAttacking = false;
             }
@@ -43,7 +43,7 @@ public class Enemy : Entity
     private void Move()
     {
         if (_isAttacking == false)
-            rigidbody2D.velocity = new Vector2(moveSpeed * facingDirection, rigidbody2D.velocity.y);
+            rb.velocity = new Vector2(moveSpeed * facingDirection, rb.velocity.y);
     }
 
     private void CheckCollision()

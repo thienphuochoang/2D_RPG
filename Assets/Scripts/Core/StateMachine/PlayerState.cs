@@ -6,10 +6,13 @@ public class PlayerState
 {
     protected PlayerStateMachine stateMachine;
     protected Player player;
-    protected Rigidbody2D rigidbody2D;
+    protected Rigidbody2D rb;
     
     protected float xInput;
+    protected float yInput;
     private string animBoolName;
+    protected float stateTimer;
+    protected bool animationTriggerCalled = false;
 
     public PlayerState(Player inputPlayer, PlayerStateMachine inputPlayerStateMachine, string inputAnimBoolName)
     {
@@ -21,15 +24,23 @@ public class PlayerState
     public virtual void BeginState()
     {
         player.animator.SetBool(animBoolName, true);
-        rigidbody2D = player.rigidbody2D;
+        rb = player.rb;
+        animationTriggerCalled = false;
     }
     public virtual void UpdateState()
     {
+        stateTimer -= Time.deltaTime;
         xInput = Input.GetAxisRaw("Horizontal");
-        player.animator.SetFloat("yVelocity", rigidbody2D.velocity.y);
+        yInput = Input.GetAxisRaw("Vertical");
+        player.animator.SetFloat("yVelocity", rb.velocity.y);
     }
     public virtual void EndState()
     {
         player.animator.SetBool(animBoolName, false);
+    }
+
+    public virtual void FinishAnimationTrigger()
+    {
+        animationTriggerCalled = true;
     }
 }
