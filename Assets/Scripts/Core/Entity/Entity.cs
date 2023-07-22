@@ -29,7 +29,11 @@ public class Entity : MonoBehaviour
     
     public bool IsGroundedDetected() =>Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayerMask);
     public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, groundLayerMask);
-    
+
+    protected virtual void Awake()
+    {
+    }
+
     protected virtual void Start()
     {
         rb = GetComponentInChildren<Rigidbody2D>();
@@ -59,7 +63,12 @@ public class Entity : MonoBehaviour
             Flip();
         }
     }
-
+    public void ResetZeroVelocity() => rb.velocity = Vector2.zero;
+    public void SetVelocity(float xVelocity, float yVelocity)
+    {
+        rb.velocity = new Vector2(xVelocity, yVelocity);
+        ControlFlip(xVelocity);
+    }
     protected virtual void OnDrawGizmos()
     {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
