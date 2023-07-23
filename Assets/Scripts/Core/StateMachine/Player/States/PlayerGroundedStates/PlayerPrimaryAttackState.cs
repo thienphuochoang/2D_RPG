@@ -15,6 +15,7 @@ public class PlayerPrimaryAttackState : PlayerState
     public override void BeginState()
     {
         base.BeginState();
+        xInput = 0;
         if (comboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow)
             comboCounter = 0;
         

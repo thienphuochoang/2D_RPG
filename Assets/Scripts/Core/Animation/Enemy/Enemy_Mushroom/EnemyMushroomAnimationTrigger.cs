@@ -10,4 +10,18 @@ public class EnemyMushroomAnimationTrigger : MonoBehaviour
     {
         _enemy.TriggerAnimation();
     }
+
+    private void TriggerAttack()
+    {
+        Collider2D[] colliders =
+            Physics2D.OverlapCircleAll(_enemy.attackCheck.position, _enemy.attackCheckRadius);
+        foreach (Collider2D hitObj in colliders)
+        {
+            if (hitObj.GetComponent<Player>() != null)
+                hitObj.GetComponent<Player>().Damage();
+        }
+    }
+
+    private void EnableCounterAttack() => _enemy.EnableCounterAttack();
+    private void DisableCounterAttack() => _enemy.DisableCounterAttack();
 }

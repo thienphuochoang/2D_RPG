@@ -15,13 +15,13 @@ public class EnemyMushroomMoveState : EnemyGroundedState
     public override void UpdateState()
     {
         base.UpdateState();
-        enemy.SetVelocity(enemy.moveSpeed * enemy.facingDirection, enemy.rb.velocity.y);
 
         if (enemy.IsWallDetected() || enemy.IsGroundedDetected() == false)
         {
             enemy.Flip();
             stateMachine.ChangeState(enemy.idleState);
         }
+        enemy.SetVelocity(enemy.moveSpeed * enemy.facingDirection, rb.velocity.y);
     }
 
     public override void EndState()

@@ -23,6 +23,13 @@ public class Enemy : Entity
     public float lastTimeAttacked;
     public float battleTime;
 
+    [Header("Stunned info")]
+    public float stunDuration;
+    public Vector2 stunDirection;
+    protected bool canBeStunned = false;
+    [SerializeField]
+    protected GameObject counterImage;
+
     public virtual RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, playerCheckDistance,
         playerLayerMask);
 
@@ -36,6 +43,28 @@ public class Enemy : Entity
     {
         base.Update();
         stateMachine.currentState.UpdateState();
+    }
+
+    public virtual void EnableCounterAttack()
+    {
+        canBeStunned = true;
+        counterImage.SetActive(true);
+    }
+    public virtual void DisableCounterAttack()
+    {
+        canBeStunned = false;
+        counterImage.SetActive(false);
+    }
+
+    protected virtual bool CanBeStunned()
+    {
+        if (canBeStunned)
+        {
+            DisableCounterAttack();
+            return true;
+        }
+
+        return false;
     }
     protected override void OnDrawGizmos()
     {

@@ -8,6 +8,7 @@ public class Entity : MonoBehaviour
 {
     public Rigidbody2D rb { get; private set; }
     public Animator animator { get; private set; }
+    public HitEffect hitEffect { get; private set; }
 
     public int facingDirection { get; private set; } = 1;
     private bool _facingRight = true;
@@ -25,8 +26,19 @@ public class Entity : MonoBehaviour
     protected Transform wallCheck;
     [SerializeField]
     protected float wallCheckDistance;
+    [Space]
+    public Transform attackCheck;
+    public float attackCheckRadius;
+
+    [Header("Knockback info")]
+    [SerializeField]
+    protected Vector2 knockbackDirection;
+    [SerializeField]
+    protected float knockbackDuration;
+    protected bool isKnocked;
     
-    
+
+
     public bool IsGroundedDetected() =>Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayerMask);
     public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, groundLayerMask);
 
@@ -36,6 +48,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void Start()
     {
+        hitEffect = GetComponent<HitEffect>();
         rb = GetComponentInChildren<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         if (wallCheck == null)
@@ -63,15 +76,39 @@ public class Entity : MonoBehaviour
             Flip();
         }
     }
-    public void ResetZeroVelocity() => rb.velocity = Vector2.zero;
+
+    public void ResetZeroVelocity()
+    {
+        if (isKnocked)
+            return;
+        rb.velocity = Vector2.zero;
+    }
     public void SetVelocity(float xVelocity, float yVelocity)
     {
+        if (isKnocked)
+            return;
         rb.velocity = new Vector2(xVelocity, yVelocity);
         ControlFlip(xVelocity);
     }
+
+    public virtual void Damage()
+    {
+        hitEffect.StartCoroutine(nameof(hitEffect.FlashFX));
+        StartCoroutine(nameof(HitKnockBack));
+    }
+
+    protected virtual IEnumerator HitKnockBack()
+    {
+        isKnocked = true;
+        rb.velocity = new Vector2(knockbackDirection.x * -facingDirection, knockbackDirection.y);
+        yield return new WaitForSeconds(knockbackDuration);
+        isKnocked = false;
+    }
+    
     protected virtual void OnDrawGizmos()
     {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
+        Gizmos.DrawWireSphere(attackCheck.position, attackCheckRadius);
     }
 }

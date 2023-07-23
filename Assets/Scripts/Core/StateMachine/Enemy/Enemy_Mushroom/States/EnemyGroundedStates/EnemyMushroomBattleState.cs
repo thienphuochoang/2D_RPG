@@ -35,11 +35,14 @@ public class EnemyMushroomBattleState : EnemyState
             if (stateTimer < 0 || Vector2.Distance(_player.transform.position, _enemy.transform.position) > 15)
                 stateMachine.ChangeState(_enemy.idleState);
         }
-        if (_player.position.x > _enemy.transform.position.x)
+
+        if (Vector2.Distance(_player.position, _enemy.transform.position) < _enemy.attackDistance)
+            _moveDirection = 0;
+        else if (_player.position.x > _enemy.transform.position.x)
             _moveDirection = 1;
         else if (_player.position.x < _enemy.transform.position.x)
             _moveDirection = -1;
-        
+
         _enemy.SetVelocity(_enemy.moveSpeed * 1.5f * _moveDirection, rb.velocity.y);
     }
 
