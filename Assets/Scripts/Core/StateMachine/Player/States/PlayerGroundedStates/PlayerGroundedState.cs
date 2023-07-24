@@ -16,10 +16,13 @@ public class PlayerGroundedState : PlayerState
     public override void UpdateState()
     {
         base.UpdateState();
-        if (Input.GetKey(KeyCode.Mouse0))
+        player.dashUsageTimer -= Time.deltaTime;
+        if (Input.GetKey(KeyCode.A))
             stateMachine.ChangeState(player.primaryAttackState);
         if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundedDetected())
             stateMachine.ChangeState(player.jumpState);
+        if (Input.GetKeyDown(KeyCode.Q))
+            stateMachine.ChangeState(player.counterAttackState);
     }
 
     public override void EndState()

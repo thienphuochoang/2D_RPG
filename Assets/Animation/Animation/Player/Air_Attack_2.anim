@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack_2
+  m_Name: Air_Attack_2
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,28 +20,24 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -803276124, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - time: 0.05
-      value: {fileID: -1357190696, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - time: 0.1
-      value: {fileID: 1594540720, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - time: 0.15
-      value: {fileID: 1477752104, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - time: 0.2
-      value: {fileID: -1494375056, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - time: 0.25
-      value: {fileID: -2039565816, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - time: 0.3
-      value: {fileID: -1270934124, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - time: 0.35
-      value: {fileID: 1178562765, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - time: 0.4
-      value: {fileID: -296866512, guid: be702b831269db34baa615db2e3d9c47, type: 3}
+      value: {fileID: 1645210069, guid: be702b831269db34baa615db2e3d9c47, type: 3}
+    - time: 0.055555556
+      value: {fileID: 296490543, guid: be702b831269db34baa615db2e3d9c47, type: 3}
+    - time: 0.11111111
+      value: {fileID: -1858308394, guid: be702b831269db34baa615db2e3d9c47, type: 3}
+    - time: 0.16666667
+      value: {fileID: 1502730912, guid: be702b831269db34baa615db2e3d9c47, type: 3}
+    - time: 0.22222222
+      value: {fileID: -2122815653, guid: be702b831269db34baa615db2e3d9c47, type: 3}
+    - time: 0.2777778
+      value: {fileID: 2033480241, guid: be702b831269db34baa615db2e3d9c47, type: 3}
+    - time: 0.33333334
+      value: {fileID: 1536740740, guid: be702b831269db34baa615db2e3d9c47, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 20
+  m_SampleRate: 18
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -56,21 +52,19 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: -803276124, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - {fileID: -1357190696, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - {fileID: 1594540720, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - {fileID: 1477752104, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - {fileID: -1494375056, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - {fileID: -2039565816, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - {fileID: -1270934124, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - {fileID: 1178562765, guid: be702b831269db34baa615db2e3d9c47, type: 3}
-    - {fileID: -296866512, guid: be702b831269db34baa615db2e3d9c47, type: 3}
+    - {fileID: 1645210069, guid: be702b831269db34baa615db2e3d9c47, type: 3}
+    - {fileID: 296490543, guid: be702b831269db34baa615db2e3d9c47, type: 3}
+    - {fileID: -1858308394, guid: be702b831269db34baa615db2e3d9c47, type: 3}
+    - {fileID: 1502730912, guid: be702b831269db34baa615db2e3d9c47, type: 3}
+    - {fileID: -2122815653, guid: be702b831269db34baa615db2e3d9c47, type: 3}
+    - {fileID: 2033480241, guid: be702b831269db34baa615db2e3d9c47, type: 3}
+    - {fileID: 1536740740, guid: be702b831269db34baa615db2e3d9c47, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.45
+    m_StopTime: 0.3888889
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -90,14 +84,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.2
+  - time: 0.055555556
     functionName: TriggerAttack
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.4
+  - time: 0.33333334
     functionName: TriggerAnimation
     data: 
     objectReferenceParameter: {fileID: 0}

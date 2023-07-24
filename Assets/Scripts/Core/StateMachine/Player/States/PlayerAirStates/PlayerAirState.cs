@@ -15,6 +15,10 @@ public class PlayerAirState : PlayerState
     public override void UpdateState()
     {
         base.UpdateState();
+        
+        if (Input.GetKey(KeyCode.A))
+            stateMachine.ChangeState(player.airAttackState);
+        
         if (player.IsWallDetected())
             stateMachine.ChangeState(player.wallSlideState);
 
