@@ -613,7 +613,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.99, y: 9.089999, z: -10}
+  m_LocalPosition: {x: -5.9900002, y: 9.089999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1501,6 +1501,8 @@ MonoBehaviour:
   attackCheckRadius: 1.41
   knockbackDirection: {x: 3, y: 3}
   knockbackDuration: 0.07
+  criticalKnockbackDuration: 1.2
+  criticalKnockbackDirection: {x: 8, y: 6}
   moveSpeed: 2
   idleTime: 2
   playerCheckDistance: 15
@@ -1569,6 +1571,9 @@ GameObject:
   m_Component:
   - component: {fileID: 858944188}
   - component: {fileID: 858944189}
+  - component: {fileID: 858944190}
+  - component: {fileID: 858944191}
+  - component: {fileID: 858944192}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -1603,6 +1608,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08084c5271682e44ab3bdb92d06eb6f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &858944190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858944187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b0245f501c7e441815c76dd3e86ae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolDown: 1.5
+--- !u!114 &858944191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858944187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 597e0043dd814f24ba5fc1a0f5d99fa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolDown: 2
+  fireBulletPrefab: {fileID: 2788154465725030068, guid: 25e9ef52309f304499f45e2f0c57c009, type: 3}
+  spawnPoint: {fileID: 955469207}
+  moveSpeed: 10
+  existDuration: 2
+--- !u!114 &858944192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858944187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faaf9cbabeed0d04189b2f07caa19c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolDown: 5
+  explosionHolePrefab: {fileID: 6237209757613307902, guid: 03fa82225378e704fa104fcf580464e1, type: 3}
+  spawnPoint: {fileID: 955469207}
+  _maxSize: 5
+  _growSpeed: 1
+  _existDuration: 4
 --- !u!1 &863805268
 GameObject:
   m_ObjectHideFlags: 0
@@ -1781,13 +1834,44 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924637052}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.99, y: 9.089999, z: -10}
+  m_LocalPosition: {x: -5.9900002, y: 9.089999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1995263172}
   m_Father: {fileID: 67360052}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &955469206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 955469207}
+  m_Layer: 7
+  m_Name: BulletSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &955469207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955469206}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1108228530}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &997115322
 GameObject:
@@ -1927,6 +2011,7 @@ Transform:
   - {fileID: 761341267}
   - {fileID: 1324405227}
   - {fileID: 1980171123}
+  - {fileID: 955469207}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1974,12 +2059,12 @@ MonoBehaviour:
   attackCheckRadius: 1.64
   knockbackDirection: {x: 3, y: 3}
   knockbackDuration: 0.07
+  criticalKnockbackDuration: 0
+  criticalKnockbackDirection: {x: 0, y: 0}
   moveSpeed: 7
   jumpForce: 15
   dashSpeed: 15
   dashDuration: 0.5
-  dashCooldown: 1.5
-  dashUsageTimer: 0
   dashDirection: 0
   attackOffsetMovement:
   - {x: 2, y: 1.5}

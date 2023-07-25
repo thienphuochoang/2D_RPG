@@ -33,6 +33,7 @@ public class EnemyMushroomStunnedState : EnemyState
     {
         base.EndState();
         _spriteRenderer.flipX = false;
+        _enemy.Flip();
         _enemy.hitEffect.Invoke(nameof(_enemy.hitEffect.CancelRedBlink), 0);
     }
 }

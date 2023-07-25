@@ -35,6 +35,10 @@ public class Entity : MonoBehaviour
     protected Vector2 knockbackDirection;
     [SerializeField]
     protected float knockbackDuration;
+    [SerializeField]
+    protected float criticalKnockbackDuration;
+    [SerializeField]
+    protected Vector2 criticalKnockbackDirection;
     protected bool isKnocked;
     
 
@@ -97,11 +101,25 @@ public class Entity : MonoBehaviour
         StartCoroutine(nameof(HitKnockBack));
     }
 
+    public virtual void CriticalDamage()
+    {
+        hitEffect.StartCoroutine(nameof(hitEffect.FlashFX));
+        StartCoroutine(nameof(CriticalHitKnockBack));
+    }
+
     protected virtual IEnumerator HitKnockBack()
     {
         isKnocked = true;
         rb.velocity = new Vector2(knockbackDirection.x * -facingDirection, knockbackDirection.y);
         yield return new WaitForSeconds(knockbackDuration);
+        isKnocked = false;
+    }
+    
+    protected virtual IEnumerator CriticalHitKnockBack()
+    {
+        isKnocked = true;
+        rb.velocity = new Vector2(criticalKnockbackDirection.x * -facingDirection, criticalKnockbackDirection.y);
+        yield return new WaitForSeconds(criticalKnockbackDuration);
         isKnocked = false;
     }
     

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Enemy : Entity
 {
     public EnemyStateMachine stateMachine { get; private set; }
+    private float defaultMoveSpeed;
     [Header("Move info")]
     public float moveSpeed = 2f;
     public float idleTime = 2f;
@@ -37,6 +38,7 @@ public class Enemy : Entity
     {
         base.Awake();
         stateMachine = new EnemyStateMachine();
+        defaultMoveSpeed = moveSpeed;
     }
 
     protected override void Update()
@@ -65,6 +67,27 @@ public class Enemy : Entity
         }
 
         return false;
+    }
+
+    public void FreezeTime(bool isTimeFrozen)
+    {
+        if (isTimeFrozen)
+        {
+            moveSpeed = 0;
+            animator.speed = 0;
+        }
+        else
+        {
+            moveSpeed = defaultMoveSpeed;
+            animator.speed = 1;
+        }
+    }
+
+    public virtual IEnumerator FreezeTimeFor(float seconds)
+    {
+        FreezeTime(true);
+        yield return new WaitForSeconds(seconds);
+        FreezeTime(false);
     }
     protected override void OnDrawGizmos()
     {

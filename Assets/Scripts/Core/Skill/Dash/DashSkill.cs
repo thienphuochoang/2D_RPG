@@ -6,6 +6,7 @@ public class DashSkill : Skill
 {
     public override void Activate()
     {
-        
+        base.Activate();
     }
+    
 }

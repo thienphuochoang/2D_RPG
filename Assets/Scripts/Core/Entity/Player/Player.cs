@@ -16,6 +16,8 @@ public class Player : Entity
     public PlayerPrimaryAttackState primaryAttackState { get; private set; }
     public PlayerCounterAttackState counterAttackState { get; private set; }
     public PlayerDashState dashState { get; private set; }
+    public PlayerFireBulletState fireBulletState { get; private set; }
+    public PlayerExplosionHoleState explosionHoleState { get; private set; }
     public bool isBusy { get; private set; }
 
     [Header("Move info")]
@@ -25,9 +27,6 @@ public class Player : Entity
     [Header("Dash info")]
     public float dashSpeed = 15f;
     public float dashDuration = 0.5f;
-    public float dashCooldown = 1.5f;
-    [HideInInspector]
-    public float dashUsageTimer;
     [HideInInspector]
     public float dashDirection;
 
@@ -52,6 +51,8 @@ public class Player : Entity
         counterAttackState = new PlayerCounterAttackState(this, stateMachine, "CounterAttack");
         airAttackState = new PlayerAirAttackState(this, stateMachine, "AirAttack");
         dashState = new PlayerDashState(this, stateMachine, "Dash");
+        fireBulletState = new PlayerFireBulletState(this, stateMachine, "FireBullet");
+        explosionHoleState = new PlayerExplosionHoleState(this, stateMachine, "ExplosionHoleActivate");
     }
 
     protected override void Start()
@@ -80,10 +81,10 @@ public class Player : Entity
     {
         if (IsWallDetected())
             return;
-        dashUsageTimer -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.S) && IsGroundedDetected() && dashUsageTimer < 0)
+
+        if (Input.GetKeyDown(KeyCode.S) && IsGroundedDetected() && SkillManager.Instance.dash.CanUseSkill())
         {
-            dashUsageTimer = dashCooldown;
+            SkillManager.Instance.dash.UseSkill();
             dashDirection = Input.GetAxisRaw("Horizontal");
             if (dashDirection == 0)
                 dashDirection = facingDirection;

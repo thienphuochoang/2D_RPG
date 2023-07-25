@@ -16,13 +16,16 @@ public class PlayerGroundedState : PlayerState
     public override void UpdateState()
     {
         base.UpdateState();
-        player.dashUsageTimer -= Time.deltaTime;
         if (Input.GetKey(KeyCode.A))
             stateMachine.ChangeState(player.primaryAttackState);
         if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundedDetected())
             stateMachine.ChangeState(player.jumpState);
         if (Input.GetKeyDown(KeyCode.Q))
             stateMachine.ChangeState(player.counterAttackState);
+        if (Input.GetKeyDown(KeyCode.Alpha1) && player.IsGroundedDetected() && SkillManager.Instance.fireBulletSkill.CanUseSkill())
+            stateMachine.ChangeState(player.fireBulletState);
+        if (Input.GetKeyDown(KeyCode.Alpha2) && player.IsGroundedDetected() && SkillManager.Instance.explosionHoleSkill.CanUseSkill())
+            stateMachine.ChangeState(player.explosionHoleState);
     }
 
     public override void EndState()

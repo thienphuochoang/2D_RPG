@@ -11,6 +11,28 @@ public class PlayerAnimationTriggers : MonoBehaviour
     {
         _thePlayer.TriggerAnimation();
     }
+    
+    private void TriggerFireBulletProjectile()
+    {
+        if (SkillManager.Instance.fireBulletSkill.CanUseSkill())
+            SkillManager.Instance.fireBulletSkill.UseSkill();
+    }
+
+    private void TriggerExplosionHole()
+    {
+        if (SkillManager.Instance.explosionHoleSkill.CanUseSkill())
+            SkillManager.Instance.explosionHoleSkill.UseSkill();
+    }
+
+    private void TriggerDisableCollision()
+    {
+        _thePlayer.GetComponent<CapsuleCollider2D>().enabled = false;
+    }
+    
+    private void TriggerEnableCollision()
+    {
+        _thePlayer.GetComponent<CapsuleCollider2D>().enabled = true;
+    }
 
     private void TriggerAttack()
     {

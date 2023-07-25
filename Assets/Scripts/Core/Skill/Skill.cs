@@ -14,17 +14,25 @@ public class Skill : MonoBehaviour
 
     public virtual bool CanUseSkill()
     {
-        if (coolDownTimer < 0)
+        bool canBeActivated = coolDownTimer < 0;
+        return canBeActivated;
+        /*if (coolDownTimer < 0)
         {
+            Activate();
             coolDownTimer = coolDown;
             return true;
         }
 
-        return false;
+        return false;*/
+    }
+
+    public virtual void UseSkill()
+    {
+        Activate();
+        coolDownTimer = coolDown;
     }
 
     public virtual void Activate()
     {
-        
     }
 }

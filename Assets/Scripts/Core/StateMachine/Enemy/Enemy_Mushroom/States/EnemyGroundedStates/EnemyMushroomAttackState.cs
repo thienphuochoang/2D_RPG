@@ -14,7 +14,7 @@ public class EnemyMushroomAttackState : EnemyState
     public override void BeginState()
     {
         base.BeginState();
-        _player = GameObject.FindWithTag("Player").transform;
+        _player = PlayerManager.Instance.player.transform;
     }
 
     public override void UpdateState()
