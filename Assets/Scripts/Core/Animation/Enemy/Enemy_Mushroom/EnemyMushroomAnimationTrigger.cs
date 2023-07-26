@@ -18,7 +18,11 @@ public class EnemyMushroomAnimationTrigger : MonoBehaviour
         foreach (Collider2D hitObj in colliders)
         {
             if (hitObj.GetComponent<Player>() != null)
-                hitObj.GetComponent<Player>().Damage();
+            {
+                PlayerStats target = hitObj.GetComponent<PlayerStats>();
+                hitObj.GetComponent<Player>().TriggerDamageEffect();
+                _enemy.stats.DoDamge(target);
+            }
         }
     }
 

@@ -24,6 +24,6 @@ public class FireBullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D hitEnemy)
     {
         if (hitEnemy.gameObject.GetComponent<Enemy>() != null)
-            hitEnemy.gameObject.GetComponent<Enemy>().Damage();
+            hitEnemy.gameObject.GetComponent<Enemy>().TriggerDamageEffect();
     }
 }

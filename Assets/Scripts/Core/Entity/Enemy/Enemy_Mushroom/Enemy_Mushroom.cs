@@ -9,7 +9,6 @@ public class Enemy_Mushroom : Enemy
     public EnemyMushroomBattleState battleState { get; private set; }
     public EnemyMushroomAttackState attackState { get; private set; }
     public EnemyMushroomStunnedState stunnedState { get; private set; }
-
     protected override void Awake()
     {
         base.Awake();

@@ -20,6 +20,7 @@ public class Player : Entity
     public PlayerExplosionHoleState explosionHoleState { get; private set; }
     public bool isBusy { get; private set; }
 
+
     [Header("Move info")]
     public float moveSpeed = 7f;
     public float jumpForce = 15f;
@@ -54,7 +55,7 @@ public class Player : Entity
         fireBulletState = new PlayerFireBulletState(this, stateMachine, "FireBullet");
         explosionHoleState = new PlayerExplosionHoleState(this, stateMachine, "ExplosionHoleActivate");
     }
-
+    
     protected override void Start()
     {
         base.Start();

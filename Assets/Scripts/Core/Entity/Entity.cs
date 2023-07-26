@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -9,7 +10,7 @@ public class Entity : MonoBehaviour
     public Rigidbody2D rb { get; private set; }
     public Animator animator { get; private set; }
     public HitEffect hitEffect { get; private set; }
-
+    public CharacterStats stats { get; private set; }
     public int facingDirection { get; private set; } = 1;
     private bool _facingRight = true;
 
@@ -42,12 +43,12 @@ public class Entity : MonoBehaviour
     protected bool isKnocked;
     
 
-
     public bool IsGroundedDetected() =>Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayerMask);
     public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, groundLayerMask);
 
     protected virtual void Awake()
     {
+        
     }
 
     protected virtual void Start()
@@ -55,6 +56,7 @@ public class Entity : MonoBehaviour
         hitEffect = GetComponent<HitEffect>();
         rb = GetComponentInChildren<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
+        stats = GetComponent<CharacterStats>();
         if (wallCheck == null)
             wallCheck = this.transform;
     }
@@ -95,7 +97,7 @@ public class Entity : MonoBehaviour
         ControlFlip(xVelocity);
     }
 
-    public virtual void Damage()
+    public virtual void TriggerDamageEffect()
     {
         hitEffect.StartCoroutine(nameof(hitEffect.FlashFX));
         StartCoroutine(nameof(HitKnockBack));

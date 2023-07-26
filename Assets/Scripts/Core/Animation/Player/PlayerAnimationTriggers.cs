@@ -24,16 +24,6 @@ public class PlayerAnimationTriggers : MonoBehaviour
             SkillManager.Instance.explosionHoleSkill.UseSkill();
     }
 
-    private void TriggerDisableCollision()
-    {
-        _thePlayer.GetComponent<CapsuleCollider2D>().enabled = false;
-    }
-    
-    private void TriggerEnableCollision()
-    {
-        _thePlayer.GetComponent<CapsuleCollider2D>().enabled = true;
-    }
-
     private void TriggerAttack()
     {
         Collider2D[] colliders =
@@ -41,7 +31,12 @@ public class PlayerAnimationTriggers : MonoBehaviour
         foreach (Collider2D hitObj in colliders)
         {
             if (hitObj.GetComponent<Enemy>() != null)
-                hitObj.GetComponent<Enemy>().Damage();
+            {
+                Enemy enemy = hitObj.GetComponent<Enemy>();
+                enemy.TriggerDamageEffect();
+                EnemyStats target = enemy.GetComponent<EnemyStats>();
+                _thePlayer.stats.DoDamge(target);
+            }
         }
     }
 }
