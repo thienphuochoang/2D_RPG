@@ -21,6 +21,7 @@ public class Player : Entity
     public PlayerDeadState deadState { get; private set; }
     public bool isBusy { get; private set; }
     public CapsuleCollider2D col { get; private set; }
+    public Skill whatSkillIsUsing;
 
     [Header("Move info")]
     public float moveSpeed = 7f;
@@ -95,6 +96,7 @@ public class Player : Entity
         if (Input.GetKeyDown(KeyCode.S) && IsGroundedDetected() && SkillManager.Instance.dash.CanUseSkill())
         {
             SkillManager.Instance.dash.UseSkill();
+            whatSkillIsUsing = SkillManager.Instance.dash;
             dashDirection = Input.GetAxisRaw("Horizontal");
             if (dashDirection == 0)
                 dashDirection = facingDirection;

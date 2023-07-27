@@ -1659,6 +1659,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDown: 1.5
+  manaCost: 0
+  _skillBaseDamage: 0
 --- !u!114 &858944191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1672,6 +1674,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDown: 2
+  manaCost: 20
+  _skillBaseDamage: 10
   fireBulletPrefab: {fileID: 2788154465725030068, guid: 25e9ef52309f304499f45e2f0c57c009, type: 3}
   spawnPoint: {fileID: 955469207}
   moveSpeed: 10
@@ -1689,6 +1693,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDown: 5
+  manaCost: 50
+  _skillBaseDamage: 20
   explosionHolePrefab: {fileID: 6237209757613307902, guid: 03fa82225378e704fa104fcf580464e1, type: 3}
   spawnPoint: {fileID: 955469207}
   _maxSize: 5
@@ -2100,6 +2106,7 @@ MonoBehaviour:
   knockbackDuration: 0.07
   criticalKnockbackDuration: 0
   criticalKnockbackDirection: {x: 0, y: 0}
+  whatSkillIsUsing: {fileID: 0}
   moveSpeed: 7
   jumpForce: 15
   dashSpeed: 15
@@ -2171,7 +2178,7 @@ MonoBehaviour:
     _baseValue: 0
     modifiers: 
   intelligence:
-    _baseValue: 0
+    _baseValue: 30
     modifiers: 
   vitality:
     _baseValue: 0
@@ -2189,6 +2196,9 @@ MonoBehaviour:
     _baseValue: 20
     modifiers: 
   _currentHealth: 0
+  maxMana:
+    _baseValue: 0
+    modifiers: 
 --- !u!1 &1117584391
 GameObject:
   m_ObjectHideFlags: 0

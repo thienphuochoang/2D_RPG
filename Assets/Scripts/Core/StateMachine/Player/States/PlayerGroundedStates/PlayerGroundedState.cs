@@ -22,10 +22,19 @@ public class PlayerGroundedState : PlayerState
             stateMachine.ChangeState(player.jumpState);
         if (Input.GetKeyDown(KeyCode.Q))
             stateMachine.ChangeState(player.counterAttackState);
-        if (Input.GetKeyDown(KeyCode.Alpha1) && player.IsGroundedDetected() && SkillManager.Instance.fireBulletSkill.CanUseSkill())
+        if (Input.GetKeyDown(KeyCode.Alpha1) && player.IsGroundedDetected() &&
+            SkillManager.Instance.fireBulletSkill.CanUseSkill())
+        {
+            player.whatSkillIsUsing = SkillManager.Instance.fireBulletSkill;
             stateMachine.ChangeState(player.fireBulletState);
-        if (Input.GetKeyDown(KeyCode.Alpha2) && player.IsGroundedDetected() && SkillManager.Instance.explosionHoleSkill.CanUseSkill())
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2) && player.IsGroundedDetected() &&
+            SkillManager.Instance.explosionHoleSkill.CanUseSkill())
+        {
+            player.whatSkillIsUsing = SkillManager.Instance.explosionHoleSkill;
             stateMachine.ChangeState(player.explosionHoleState);
+        }
     }
 
     public override void EndState()

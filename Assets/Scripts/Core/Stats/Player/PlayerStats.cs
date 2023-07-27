@@ -5,12 +5,30 @@ using UnityEngine;
 public class PlayerStats : CharacterStats
 {
     private Player _player;
+    public Stat maxMana;
+    public int currentMana { get; private set; }
+
     protected override void Start()
     {
         base.Start();
         _player = GetComponent<Player>();
+        maxMana.SetDefaultValue(intelligence.GetValue() * 4);
+        currentMana = maxMana.GetValue();
+    }
+    
+    public virtual void DoMagicalDamage(CharacterStats targetStats, Skill skill)
+    {
+        int totalMagicalDamage = intelligence.GetValue() + skill.skillBaseDamage;
+        totalMagicalDamage = Mathf.Clamp(totalMagicalDamage, 0, int.MaxValue);
+        targetStats.TakeDamage(totalMagicalDamage);
     }
 
+    public void ConsumeMana(int manaCost)
+    {
+        currentMana -= manaCost;
+        Debug.Log(currentMana);
+    }
+    
     public override void TakeDamage(int inputDamage)
     {
         base.TakeDamage(inputDamage);

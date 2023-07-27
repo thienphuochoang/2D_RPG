@@ -24,7 +24,7 @@ public class PlayerAnimationTriggers : MonoBehaviour
             SkillManager.Instance.explosionHoleSkill.UseSkill();
     }
 
-    private void TriggerAttack()
+    private void TriggerPhysicalAttack()
     {
         Collider2D[] colliders =
             Physics2D.OverlapCircleAll(_thePlayer.attackCheck.position, _thePlayer.attackCheckRadius);

@@ -5,9 +5,9 @@ using UnityEngine;
 public class CharacterStats : MonoBehaviour
 {
     [Header("Major Stats")]
-    public Stat strength; // Increase damage by 1
+    public Stat strength; // Increase physical damage by 1
     public Stat agility; // Increase evasion by 1%
-    public Stat intelligence; // Increase magic damage by 1 and by maximum mana by 5
+    public Stat intelligence; // Increase magic damage by 1 and maximum mana by 4
     public Stat vitality; // Increase health by 4;
     
     [Header("Sub-stats")]
@@ -22,7 +22,7 @@ public class CharacterStats : MonoBehaviour
 
     protected virtual void Start()
     {
-        _currentHealth = maxHealth.GetValue();
+        _currentHealth = maxHealth.GetValue() + vitality.GetValue() * 4;
     }
 
     public virtual void DoDamge(CharacterStats targetStats)

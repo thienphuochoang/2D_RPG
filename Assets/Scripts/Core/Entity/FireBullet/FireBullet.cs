@@ -24,6 +24,11 @@ public class FireBullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D hitEnemy)
     {
         if (hitEnemy.gameObject.GetComponent<Enemy>() != null)
+        {
+            Enemy enemy = hitEnemy.gameObject.GetComponent<Enemy>();
+            PlayerStats playerStats = PlayerManager.Instance.player.GetComponent<PlayerStats>();
+            playerStats.DoMagicalDamage(enemy.GetComponent<EnemyStats>(), PlayerManager.Instance.player.whatSkillIsUsing);
             hitEnemy.gameObject.GetComponent<Enemy>().TriggerDamageEffect();
+        }
     }
 }
