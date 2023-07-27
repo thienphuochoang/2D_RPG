@@ -6,6 +6,8 @@ using UnityEngine;
 public class Enemy : Entity
 {
     public EnemyStateMachine stateMachine { get; private set; }
+    public BoxCollider2D col { get; private set; }
+    public string lastAnimationBoolName { get; private set; }
     private float defaultMoveSpeed;
     [Header("Move info")]
     public float moveSpeed = 2f;
@@ -41,10 +43,21 @@ public class Enemy : Entity
         defaultMoveSpeed = moveSpeed;
     }
 
+    protected override void Start()
+    {
+        base.Start();
+        col = GetComponent<BoxCollider2D>();
+    }
+
     protected override void Update()
     {
         base.Update();
         stateMachine.currentState.UpdateState();
+    }
+
+    public virtual void AssignLastAnimationName(string animationBoolName)
+    {
+        lastAnimationBoolName = animationBoolName;
     }
 
     public virtual void EnableCounterAttack()

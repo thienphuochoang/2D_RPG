@@ -15,7 +15,6 @@ public class PlayerPrimaryAttackState : PlayerState
     public override void BeginState()
     {
         base.BeginState();
-        xInput = 0;
         if (comboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow)
             comboCounter = 0;
         
@@ -24,7 +23,6 @@ public class PlayerPrimaryAttackState : PlayerState
         float attackDirection = player.facingDirection;
         if (xInput != 0)
             attackDirection = xInput;
-        
         player.SetVelocity(player.attackOffsetMovement[comboCounter].x * attackDirection, player.attackOffsetMovement[comboCounter].y);
         stateTimer = 0.1f;
     }

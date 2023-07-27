@@ -18,8 +18,9 @@ public class Player : Entity
     public PlayerDashState dashState { get; private set; }
     public PlayerFireBulletState fireBulletState { get; private set; }
     public PlayerExplosionHoleState explosionHoleState { get; private set; }
+    public PlayerDeadState deadState { get; private set; }
     public bool isBusy { get; private set; }
-
+    public CapsuleCollider2D col { get; private set; }
 
     [Header("Move info")]
     public float moveSpeed = 7f;
@@ -54,11 +55,13 @@ public class Player : Entity
         dashState = new PlayerDashState(this, stateMachine, "Dash");
         fireBulletState = new PlayerFireBulletState(this, stateMachine, "FireBullet");
         explosionHoleState = new PlayerExplosionHoleState(this, stateMachine, "ExplosionHoleActivate");
+        deadState = new PlayerDeadState(this, stateMachine, "Die");
     }
     
     protected override void Start()
     {
         base.Start();
+        col = GetComponent<CapsuleCollider2D>();
         stateMachine.Initialize(idleState);
     }
 
@@ -74,6 +77,12 @@ public class Player : Entity
         isBusy = true;
         yield return new WaitForSeconds(seconds);
         isBusy = false;
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        stateMachine.ChangeState(deadState);
     }
 
     public void TriggerAnimation() => stateMachine.currentState.FinishAnimationTrigger();

@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    public Stat strength;
-    public Stat damage;
+    [Header("Major Stats")]
+    public Stat strength; // Increase damage by 1
+    public Stat agility; // Increase evasion by 1%
+    public Stat intelligence; // Increase magic damage by 1 and by maximum mana by 5
+    public Stat vitality; // Increase health by 4;
+    
+    [Header("Sub-stats")]
     public Stat maxHealth;
+    public Stat armor;
+    public Stat evasion;
+    
+    
+    public Stat damage;
     [SerializeField]
     private int _currentHealth;
 
@@ -17,14 +27,35 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void DoDamge(CharacterStats targetStats)
     {
+        if (TargetCanAvoidAttack(targetStats))
+            return;
         int totalDamage = damage.GetValue() + strength.GetValue();
+        totalDamage = CheckTargetArmor(targetStats, totalDamage);
         targetStats.TakeDamage(totalDamage);
     }
+
+    private int CheckTargetArmor(CharacterStats targetStats, int totalDamage)
+    {
+        totalDamage -= targetStats.armor.GetValue();
+        totalDamage = Mathf.Clamp(totalDamage, 0, int.MaxValue);
+        return totalDamage;
+    }
+
+    private bool TargetCanAvoidAttack(CharacterStats targetStats)
+    {
+        int totalEvasion = targetStats.evasion.GetValue() + targetStats.agility.GetValue();
+        if (Random.Range(0, 100) < totalEvasion)
+        {
+            return true;
+        }
+
+        return false;
+    }
+    
 
     public virtual void TakeDamage(int inputDamage)
     {
         _currentHealth -= inputDamage;
-        Debug.Log(inputDamage);
         if (_currentHealth <= 0)
             Die();
     }

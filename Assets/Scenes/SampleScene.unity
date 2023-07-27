@@ -613,7 +613,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.9900002, y: 9.089999, z: -10}
+  m_LocalPosition: {x: -5.99, y: 9.089999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1546,11 +1546,26 @@ MonoBehaviour:
   strength:
     _baseValue: 0
     modifiers: 
-  damage:
-    _baseValue: 10
+  agility:
+    _baseValue: 0
+    modifiers: 
+  intelligence:
+    _baseValue: 0
+    modifiers: 
+  vitality:
+    _baseValue: 0
     modifiers: 
   maxHealth:
     _baseValue: 100
+    modifiers: 
+  armor:
+    _baseValue: 0
+    modifiers: 
+  evasion:
+    _baseValue: 0
+    modifiers: 
+  damage:
+    _baseValue: 10
     modifiers: 
   _currentHealth: 0
 --- !u!1 &761341266
@@ -1857,7 +1872,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924637052}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.9900002, y: 9.089999, z: -10}
+  m_LocalPosition: {x: -5.99, y: 9.089999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2152,11 +2167,26 @@ MonoBehaviour:
   strength:
     _baseValue: 0
     modifiers: 
-  damage:
-    _baseValue: 20
+  agility:
+    _baseValue: 0
+    modifiers: 
+  intelligence:
+    _baseValue: 0
+    modifiers: 
+  vitality:
+    _baseValue: 0
     modifiers: 
   maxHealth:
-    _baseValue: 200
+    _baseValue: 100
+    modifiers: 
+  armor:
+    _baseValue: 0
+    modifiers: 
+  evasion:
+    _baseValue: 70
+    modifiers: 
+  damage:
+    _baseValue: 20
     modifiers: 
   _currentHealth: 0
 --- !u!1 &1117584391

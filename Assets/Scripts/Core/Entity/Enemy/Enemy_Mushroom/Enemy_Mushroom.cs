@@ -9,6 +9,7 @@ public class Enemy_Mushroom : Enemy
     public EnemyMushroomBattleState battleState { get; private set; }
     public EnemyMushroomAttackState attackState { get; private set; }
     public EnemyMushroomStunnedState stunnedState { get; private set; }
+    public EnemyMushroomDeadState deadState { get; private set; }
     protected override void Awake()
     {
         base.Awake();
@@ -17,6 +18,7 @@ public class Enemy_Mushroom : Enemy
         battleState = new EnemyMushroomBattleState(this, stateMachine, "Move", this);
         attackState = new EnemyMushroomAttackState(this, stateMachine, "Attack", this);
         stunnedState = new EnemyMushroomStunnedState(this, stateMachine, "Stunned", this);
+        deadState = new EnemyMushroomDeadState(this, stateMachine, "Die", this);
     }
 
     protected override void Start()
@@ -27,8 +29,6 @@ public class Enemy_Mushroom : Enemy
     protected override void Update()
     {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.U))
-            stateMachine.ChangeState(stunnedState);
     }
 
     public override bool CanBeStunned()
@@ -40,5 +40,11 @@ public class Enemy_Mushroom : Enemy
         }
 
         return false;
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        stateMachine.ChangeState(deadState);
     }
 }

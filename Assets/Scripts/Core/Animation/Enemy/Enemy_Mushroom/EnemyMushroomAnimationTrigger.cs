@@ -20,7 +20,6 @@ public class EnemyMushroomAnimationTrigger : MonoBehaviour
             if (hitObj.GetComponent<Player>() != null)
             {
                 PlayerStats target = hitObj.GetComponent<PlayerStats>();
-                hitObj.GetComponent<Player>().TriggerDamageEffect();
                 _enemy.stats.DoDamge(target);
             }
         }
