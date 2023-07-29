@@ -3805,7 +3805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b014292f69a33a24b8bd9bf1c3913141, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumDropItems: 4
+  maximumDropItems: 2
   possibleDropList:
   - {fileID: 11400000, guid: 0a6fe32c0b8787548a2368e70c8353fa, type: 2}
   - {fileID: 11400000, guid: 9d4737dc78fe81c418f510095d30e61e, type: 2}

@@ -11,6 +11,7 @@ public class EnemyStats : CharacterStats
         base.Start();
         _enemy = GetComponent<Enemy>();
         _dropItem = GetComponent<ItemDrop>();
+        _dropItem.GenerateDropList();
     }
 
     public override void TakeDamage(int inputDamage)
@@ -23,6 +24,6 @@ public class EnemyStats : CharacterStats
     {
         base.Die();
         _enemy.Die();
-        _dropItem.GenerateDropList();
+        _dropItem.DropItem();
     }
 }

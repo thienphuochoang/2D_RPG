@@ -18,18 +18,24 @@ public class ItemDrop : MonoBehaviour
             dropList.Add(possibleDropList[i]);
         }
 
-        for (int i = 0; i < maximumDropItems; i++)
+        /*for (int i = 0; i < maximumDropItems; i++)
         {
             ItemData randomItem = dropList[Random.Range(0, dropList.Count - 1)];
             dropList.Remove(randomItem);
             DropItem(randomItem);
-        }
+        }*/
     }
-    public void DropItem(ItemData itemData)
+    public void DropItem()
     {
-        GameObject newDropItem = Instantiate(dropItemPrefab, transform.position, Quaternion.identity);
-        Vector2 randomDropVelocity = new Vector2(Random.Range(-5, 5), Random.Range(15, 20));
-        newDropItem.GetComponent<ItemObject>().SetupItem(itemData, randomDropVelocity);
+        for (int i = 0; i < maximumDropItems; i++)
+        {
+            ItemData randomItem = dropList[Random.Range(0, dropList.Count - 1)];
+            dropList.Remove(randomItem);
+            GameObject newDropItem = Instantiate(dropItemPrefab, transform.position, Quaternion.identity);
+            Vector2 randomDropVelocity = new Vector2(Random.Range(-5, 5), Random.Range(15, 20));
+            newDropItem.GetComponent<ItemObject>().SetupItem(randomItem, randomDropVelocity);
+        }
+
     }
 
 }
