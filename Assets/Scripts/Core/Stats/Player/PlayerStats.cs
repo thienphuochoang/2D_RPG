@@ -19,6 +19,7 @@ public class PlayerStats : CharacterStats
     public virtual void DoMagicalDamage(CharacterStats targetStats, Skill skill)
     {
         int totalMagicalDamage = intelligence.GetValue() + skill.skillBaseDamage;
+        Debug.Log(totalMagicalDamage);
         totalMagicalDamage = Mathf.Clamp(totalMagicalDamage, 0, int.MaxValue);
         targetStats.TakeDamage(totalMagicalDamage);
     }
@@ -26,7 +27,6 @@ public class PlayerStats : CharacterStats
     public void ConsumeMana(int manaCost)
     {
         currentMana -= manaCost;
-        Debug.Log(currentMana);
     }
     
     public override void TakeDamage(int inputDamage)

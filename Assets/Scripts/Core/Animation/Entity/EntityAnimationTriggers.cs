@@ -7,10 +7,10 @@ public class EntityAnimationTriggers : MonoBehaviour
 {
     private Player _thePlayer => PlayerManager.Instance.player;
     
-    private void TriggerMagicalAttack()
+    private void TriggerExplosionHoleAttack()
     {
         Collider2D[] colliders =
-            Physics2D.OverlapCircleAll(_thePlayer.attackCheck.position, _thePlayer.attackCheckRadius);
+            Physics2D.OverlapCircleAll(transform.position, GetComponent<CircleCollider2D>().bounds.extents.x);
         foreach (Collider2D hitObj in colliders)
         {
             if (hitObj.GetComponent<Enemy>() != null)

@@ -65,7 +65,7 @@ public class Entity : MonoBehaviour
     {
     }
 
-    public void Flip()
+    public virtual void Flip()
     {
         facingDirection = facingDirection * -1;
         _facingRight = !_facingRight;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -69,5 +70,10 @@ public class ExplosionHole : MonoBehaviour
             enemy.CriticalDamage();
         }
         Destroy(this.gameObject);
+    }
+
+    private void OnDrawGizmos()
+    {
+        //Gizmos.DrawSphere(PlayerManager.Instance.player.attackCheck.position, GetComponent<CircleCollider2D>().radius);
     }
 }

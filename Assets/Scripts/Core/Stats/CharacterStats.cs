@@ -17,12 +17,12 @@ public class CharacterStats : MonoBehaviour
     
     
     public Stat damage;
-    [SerializeField]
-    private int _currentHealth;
+    public int currentHealth { get; private set; }
+    public event System.Action OnHealthChanged;
 
     protected virtual void Start()
     {
-        _currentHealth = maxHealth.GetValue() + vitality.GetValue() * 4;
+        currentHealth = GetMaxHealthValue();
     }
 
     public virtual void DoDamge(CharacterStats targetStats)
@@ -55,13 +55,27 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void TakeDamage(int inputDamage)
     {
-        _currentHealth -= inputDamage;
-        if (_currentHealth <= 0)
+        DecreaseHealthBy(inputDamage);
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
             Die();
+        }
+    }
+
+    protected virtual void DecreaseHealthBy(int inputDamage)
+    {
+        currentHealth -= inputDamage;
+        OnHealthChanged?.Invoke();
     }
 
     protected virtual void Die()
     {
         
+    }
+
+    public int GetMaxHealthValue()
+    {
+        return maxHealth.GetValue() + vitality.GetValue() * 4;
     }
 }

@@ -36,6 +36,8 @@ public class Enemy : Entity
     public virtual RaycastHit2D IsPlayerDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, playerCheckDistance,
         playerLayerMask);
 
+    public event System.Action OnFlipped;
+
     protected override void Awake()
     {
         base.Awake();
@@ -58,6 +60,12 @@ public class Enemy : Entity
     public virtual void AssignLastAnimationName(string animationBoolName)
     {
         lastAnimationBoolName = animationBoolName;
+    }
+
+    public override void Flip()
+    {
+        base.Flip();
+        OnFlipped?.Invoke();
     }
 
     public virtual void EnableCounterAttack()
