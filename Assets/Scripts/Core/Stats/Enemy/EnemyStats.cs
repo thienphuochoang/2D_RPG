@@ -5,10 +5,12 @@ using UnityEngine;
 public class EnemyStats : CharacterStats
 {
     private Enemy _enemy;
+    private ItemDrop _dropItem;
     protected override void Start()
     {
         base.Start();
         _enemy = GetComponent<Enemy>();
+        _dropItem = GetComponent<ItemDrop>();
     }
 
     public override void TakeDamage(int inputDamage)
@@ -21,5 +23,6 @@ public class EnemyStats : CharacterStats
     {
         base.Die();
         _enemy.Die();
+        _dropItem.GenerateDropList();
     }
 }

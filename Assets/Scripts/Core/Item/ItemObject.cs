@@ -8,27 +8,35 @@ public class ItemObject : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     [SerializeField]
     private ItemData _itemData;
+    private Rigidbody2D _rb;
 
-    private void OnValidate()
+    
+    /*private void OnValidate()
     {
+        if (_itemData == null) return;
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.sprite = _itemData.itemIcon;
+        gameObject.name = "Item Object: " + _itemData.itemName;
+    }*/
+    private void SetupVisual()
+    {
+        if (_itemData == null) return;
         _spriteRenderer.sprite = _itemData.itemIcon;
         gameObject.name = "Item Object: " + _itemData.itemName;
     }
 
-    private void Start()
+    public void SetupItem(ItemData itemData, Vector2 velocity)
     {
+        _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.sprite = _itemData.itemIcon;
-        gameObject.name = _itemData.itemName;
+        _itemData = itemData;
+        _rb.velocity = velocity;
+        SetupVisual();
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    public void PickUpItem()
     {
-        if (col.GetComponent<Player>() != null)
-        {
-            InventoryManager.Instance.AddItem(_itemData);
-            Destroy(this.gameObject);
-        }
+        InventoryManager.Instance.AddItem(_itemData);
+        Destroy(this.gameObject);
     }
 }

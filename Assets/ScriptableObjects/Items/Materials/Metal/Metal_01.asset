@@ -15,3 +15,4 @@ MonoBehaviour:
   itemType: 0
   itemName: Metal_01
   itemIcon: {fileID: 21300000, guid: 0c805327f6daf4641893e309f29b8030, type: 3}
+  dropChance: 0
