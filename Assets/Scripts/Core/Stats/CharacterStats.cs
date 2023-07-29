@@ -14,8 +14,6 @@ public class CharacterStats : MonoBehaviour
     public Stat maxHealth;
     public Stat armor;
     public Stat evasion;
-    
-    
     public Stat damage;
     public int currentHealth { get; private set; }
     public event System.Action OnHealthChanged;

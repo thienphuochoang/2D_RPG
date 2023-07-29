@@ -19,7 +19,6 @@ public class PlayerStats : CharacterStats
     public virtual void DoMagicalDamage(CharacterStats targetStats, Skill skill)
     {
         int totalMagicalDamage = intelligence.GetValue() + skill.skillBaseDamage;
-        Debug.Log(totalMagicalDamage);
         totalMagicalDamage = Mathf.Clamp(totalMagicalDamage, 0, int.MaxValue);
         targetStats.TakeDamage(totalMagicalDamage);
     }

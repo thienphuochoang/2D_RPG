@@ -16,3 +16,11 @@ MonoBehaviour:
   itemName: Head_01
   itemIcon: {fileID: 21300000, guid: 73637c9c6067cba48b8159606ca60059, type: 3}
   equipmentType: 1
+  strength: 2
+  agility: 0
+  intelligence: 0
+  vitality: 2
+  maxHealth: 2
+  armor: 2
+  evasion: 0
+  damage: 0

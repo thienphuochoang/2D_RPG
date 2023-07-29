@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemSlot_UI : MonoBehaviour, IPointerDownHandler
+public class ItemSlot_UI : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     [SerializeField] private Image itemBackgroundImage;
     [SerializeField] private Image itemImage;
@@ -42,11 +42,26 @@ public class ItemSlot_UI : MonoBehaviour, IPointerDownHandler
         itemAmount.text = "";
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public virtual void OnPointerDown(PointerEventData eventData)
     {
         if (item.itemData.itemType == ItemType.Equipment)
         {
             InventoryManager.Instance.EquipItem(item.itemData);
         }
+    }
+
+    public virtual void OnDrag(PointerEventData eventData)
+    {
+        Debug.Log("Test OnDrag");
+    }
+
+    public virtual void OnDrop(PointerEventData eventData)
+    {
+        Debug.Log("Test OnDrop");
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        throw new NotImplementedException();
     }
 }

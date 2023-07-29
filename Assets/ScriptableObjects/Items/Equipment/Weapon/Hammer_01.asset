@@ -16,3 +16,11 @@ MonoBehaviour:
   itemName: Hammer_01
   itemIcon: {fileID: 21300000, guid: 58de29841d4df4b4f8b513eb11b1b65a, type: 3}
   equipmentType: 0
+  strength: 5
+  agility: 0
+  intelligence: 0
+  vitality: 2
+  maxHealth: 0
+  armor: 0
+  evasion: 0
+  damage: 12

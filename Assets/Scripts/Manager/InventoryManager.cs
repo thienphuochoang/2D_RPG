@@ -66,16 +66,18 @@ public class InventoryManager : PersistentObject<InventoryManager>
         
         equipmentItems.Add(newItem);
         equipment.Add(newEquipment, newItem);
+        newEquipment.AddModifiers();
         RemoveItem(itemData);
         UpdateSlotUI();
     }
 
-    private int UnequipItem(ItemData_Equipment itemToRemove)
+    public int UnequipItem(ItemData_Equipment itemToRemove)
     {
         if (equipment.TryGetValue(itemToRemove, out InventoryItem value))
         {
             equipmentItems.Remove(value);
             equipment.Remove(itemToRemove);
+            itemToRemove.RemoveModifiers();
         }
         return equipmentItems.IndexOf(value);
     }
@@ -190,5 +192,39 @@ public class InventoryManager : PersistentObject<InventoryManager>
         }
 
         UpdateSlotUI();
+    }
+
+    public bool CanCraft(ItemData_Equipment itemNeedToBeCrafted, List<InventoryItem> requiredItems)
+    {
+        List<InventoryItem> materialsToBeRemoved = new List<InventoryItem>();
+        {
+            for (int i = 0; i < requiredItems.Count; i++)
+            {
+                if (stash.TryGetValue(requiredItems[i].itemData, out InventoryItem stashValue))
+                {
+                    if (stashValue.stackSize < requiredItems[i].stackSize)
+                    {
+                        Debug.Log("Not enough materials");
+                        return false;
+                    }
+                    else
+                    {
+                        materialsToBeRemoved.Add(stashValue);
+                    }
+                }
+                else
+                {
+                    Debug.Log("Not enough materials");
+                    return false;
+                }
+            }
+        }
+        for (int i = 0; i < materialsToBeRemoved.Count; i++)
+        {
+            RemoveItem(materialsToBeRemoved[i].itemData);
+        }
+        AddItem(itemNeedToBeCrafted);
+        Debug.Log("Craft successfully: " + itemNeedToBeCrafted.itemName);
+        return true;
     }
 }
