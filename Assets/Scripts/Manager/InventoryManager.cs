@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class InventoryManager : PersistentObject<InventoryManager>
 {
-    public List<InventoryItem> equipmentItems;
+    [SerializeField]
+    private List<InventoryItem> startingItems = new List<InventoryItem>();
+    [SerializeField]
+    private List<InventoryItem> equipmentItems;
     public Dictionary<ItemData_Equipment, InventoryItem> equipment;
-    public List<InventoryItem> inventoryItems;
+    [SerializeField]
+    private List<InventoryItem> inventoryItems;
     public Dictionary<ItemData, InventoryItem> inventory;
-    public List<InventoryItem> stashItems;
+    [SerializeField]
+    private List<InventoryItem> stashItems;
     public Dictionary<ItemData, InventoryItem> stash;
 
     [Header("Inventory UI")]
@@ -22,6 +27,13 @@ public class InventoryManager : PersistentObject<InventoryManager>
     [Header("Equipment UI")]
     [SerializeField]
     private Transform _equipmentSlotParent;
+    
+    [Header("Flask Cooldown")]
+    private float lastTimeUsedHPFlask;
+    private float lastTimeUsedManaFlask;
+    private float hpFlaskCooldown;
+    private float manaFlaskCooldown;
+    
 
     private ItemSlot_UI[] _inventoryItemSlots;
     private ItemSlot_UI[] _stashItemSlots;
@@ -29,7 +41,6 @@ public class InventoryManager : PersistentObject<InventoryManager>
     protected override void Start()
     {
         base.Start();
-        
         equipmentItems = new List<InventoryItem>();
         equipment = new Dictionary<ItemData_Equipment, InventoryItem>();
         _equipmentItemSlots = _equipmentSlotParent.GetComponentsInChildren<EquipmentSlot_UI>();
@@ -41,8 +52,20 @@ public class InventoryManager : PersistentObject<InventoryManager>
         stashItems = new List<InventoryItem>();
         stash = new Dictionary<ItemData, InventoryItem>();
         _stashItemSlots = _stashSlotParent.GetComponentsInChildren<ItemSlot_UI>();
+        TransferStartingItemsToEquipmentItems();
     }
 
+    private void TransferStartingItemsToEquipmentItems()
+    {
+        if (startingItems.Count > 0)
+        {
+            foreach (var startingItem in startingItems)
+            {
+                EquipItem(startingItem.itemData);
+            }
+        }
+        startingItems.Clear();
+    }
     public void EquipItem(ItemData itemData)
     {
         ItemData_Equipment newEquipment = itemData as ItemData_Equipment;
@@ -53,6 +76,7 @@ public class InventoryManager : PersistentObject<InventoryManager>
         {
             if (item.Key.equipmentType == newEquipment.equipmentType)
             {
+                Debug.Log(item.Key);
                 oldEquipment = item.Key;
             }
         }
@@ -226,5 +250,63 @@ public class InventoryManager : PersistentObject<InventoryManager>
         AddItem(itemNeedToBeCrafted);
         Debug.Log("Craft successfully: " + itemNeedToBeCrafted.itemName);
         return true;
+    }
+
+    public List<InventoryItem> GetEquipmentList() => equipmentItems;
+    public List<InventoryItem> GetStashList() => stashItems;
+    public List<InventoryItem> GetInventoryList() => inventoryItems;
+
+    public ItemData_Equipment GetEquipment(EquipmentType type)
+    {
+        ItemData_Equipment equipedItem = null;
+        foreach (KeyValuePair<ItemData_Equipment, InventoryItem> item in equipment)
+        {
+            if (item.Key.equipmentType == type)
+                equipedItem = item.Key;
+        }
+        return equipedItem;
+    }
+
+    public void UseFlask(EquipmentType flaskType)
+    {
+        switch (flaskType)
+        {
+            case EquipmentType.HpFlask:
+            {
+                ItemData_Equipment currentFlask = GetEquipment(EquipmentType.HpFlask);
+                if (currentFlask == null)
+                    return;
+                bool canUseFlask = Time.time > lastTimeUsedHPFlask + hpFlaskCooldown;
+                if (canUseFlask)
+                {
+                    hpFlaskCooldown = currentFlask.itemCooldown;
+                    currentFlask.ExecuteItemEffect();
+                    lastTimeUsedHPFlask = Time.time;
+                }
+                else
+                {
+                    Debug.Log("Flask is on cooldown");
+                }
+                break;
+            }
+            case EquipmentType.ManaFlask:
+            {
+                ItemData_Equipment currentFlask = GetEquipment(EquipmentType.ManaFlask);
+                if (currentFlask == null)
+                    return;
+                bool canUseFlask = Time.time > lastTimeUsedManaFlask + manaFlaskCooldown;
+                if (canUseFlask)
+                {
+                    manaFlaskCooldown = currentFlask.itemCooldown;
+                    currentFlask.ExecuteItemEffect();
+                    lastTimeUsedManaFlask = Time.time;
+                }
+                else
+                {
+                    Debug.Log("Flask is on cooldown");
+                }
+                break;
+            }
+        }
     }
 }

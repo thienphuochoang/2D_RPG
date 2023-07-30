@@ -16,6 +16,7 @@ public class CharacterStats : MonoBehaviour
     public Stat evasion;
     public Stat damage;
     public int currentHealth { get; private set; }
+    public bool isDead { get; private set; }
     public event System.Action OnHealthChanged;
 
     protected virtual void Start()
@@ -53,6 +54,7 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void TakeDamage(int inputDamage)
     {
+        if (isDead) return;
         DecreaseHealthBy(inputDamage);
         if (currentHealth <= 0)
         {
@@ -61,15 +63,23 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
-    protected virtual void DecreaseHealthBy(int inputDamage)
+    public virtual void DecreaseHealthBy(int inputDamage)
     {
         currentHealth -= inputDamage;
+        OnHealthChanged?.Invoke();
+    }
+    
+    public virtual void IncreaseHealthBy(int inputHealth)
+    {
+        currentHealth += inputHealth;
+        if (currentHealth > GetMaxHealthValue())
+            currentHealth = GetMaxHealthValue();
         OnHealthChanged?.Invoke();
     }
 
     protected virtual void Die()
     {
-        
+        isDead = true;
     }
 
     public int GetMaxHealthValue()

@@ -71,6 +71,14 @@ public class Player : Entity
         base.Update();
         stateMachine.currentState.UpdateState();
         CheckForDashInput();
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            InventoryManager.Instance.UseFlask(EquipmentType.HpFlask);
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            InventoryManager.Instance.UseFlask(EquipmentType.ManaFlask);
+        }
     }
 
     public IEnumerator BusyFor(float seconds)

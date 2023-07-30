@@ -44,6 +44,10 @@ public class ItemSlot_UI : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            InventoryManager.Instance.RemoveItem(item.itemData);
+        }
         if (item.itemData.itemType == ItemType.Equipment)
         {
             InventoryManager.Instance.EquipItem(item.itemData);

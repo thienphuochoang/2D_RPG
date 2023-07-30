@@ -10,7 +10,8 @@ public enum EquipmentType
     Hands,
     Shoes,
     Amulet,
-    Potion
+    HpFlask,
+    ManaFlask
 }
 [CreateAssetMenu(fileName = "Assets/ScriptableObjects/Items/New Equipment Data", menuName = "2D_RPG/Item_Equipment")]
 public class ItemData_Equipment : ItemData
@@ -27,6 +28,12 @@ public class ItemData_Equipment : ItemData
     public int armor;
     public int evasion;
     public int damage;
+
+    [Header("Item effects")]
+    public ItemEffect[] itemEffects;
+
+    [Header("Item Cooldown")] 
+    public float itemCooldown;
 
     [Header("Craft requirements")]
     public List<InventoryItem> craftingMaterials;
@@ -56,5 +63,13 @@ public class ItemData_Equipment : ItemData
         playerStats.armor.RemoveModifier(armor);
         playerStats.evasion.RemoveModifier(evasion);
         playerStats.damage.RemoveModifier(damage);
+    }
+
+    public void ExecuteItemEffect()
+    {
+        foreach (ItemEffect effect in itemEffects)
+        {
+            effect.ExecuteEffect();
+        }
     }
 }

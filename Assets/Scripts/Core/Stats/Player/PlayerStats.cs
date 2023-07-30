@@ -7,12 +7,13 @@ public class PlayerStats : CharacterStats
     private Player _player;
     public Stat maxMana;
     public int currentMana { get; private set; }
+    public event System.Action OnManaChanged;
 
     protected override void Start()
     {
         base.Start();
         _player = GetComponent<Player>();
-        maxMana.SetDefaultValue(intelligence.GetValue() * 4);
+        maxMana.SetDefaultValue(GetMaxManaValue());
         currentMana = maxMana.GetValue();
     }
     
@@ -26,6 +27,20 @@ public class PlayerStats : CharacterStats
     public void ConsumeMana(int manaCost)
     {
         currentMana -= manaCost;
+        OnManaChanged?.Invoke();
+    }
+    
+    public void IncreaseManaBy(int manaAmount)
+    {
+        currentMana += manaAmount;
+        if (currentMana > GetMaxManaValue())
+            currentMana = GetMaxManaValue();
+        OnManaChanged?.Invoke();
+    }
+    
+    public int GetMaxManaValue()
+    {
+        return intelligence.GetValue() * 4;
     }
     
     public override void TakeDamage(int inputDamage)
