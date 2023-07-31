@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class ItemSlot_UI : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
-    [SerializeField] private Image itemBackgroundImage;
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemAmount;
 
@@ -19,7 +18,6 @@ public class ItemSlot_UI : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
         item = newItem;
         if (item != null)
         {
-            itemBackgroundImage.GetComponent<Image>().enabled = true;
             itemImage.GetComponent<Image>().enabled = true;
             itemImage.sprite = item.itemData.itemIcon;
             if (item.stackSize > 1)
@@ -36,7 +34,6 @@ public class ItemSlot_UI : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
     public void CleanUpSlot()
     {
         item = null;
-        itemBackgroundImage.GetComponent<Image>().enabled = false;
         itemImage.GetComponent<Image>().enabled = false;
         itemImage.sprite = null;
         itemAmount.text = "";
@@ -44,14 +41,18 @@ public class ItemSlot_UI : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (item.itemData != null)
         {
-            InventoryManager.Instance.RemoveItem(item.itemData);
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                InventoryManager.Instance.RemoveItem(item.itemData);
+            }
+            if (item.itemData.itemType == ItemType.Equipment)
+            {
+                InventoryManager.Instance.EquipItem(item.itemData);
+            }
         }
-        if (item.itemData.itemType == ItemType.Equipment)
-        {
-            InventoryManager.Instance.EquipItem(item.itemData);
-        }
+
     }
 
     public virtual void OnDrag(PointerEventData eventData)

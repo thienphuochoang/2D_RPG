@@ -11,7 +11,7 @@ public class CharacterStats : MonoBehaviour
     public Stat vitality; // Increase health by 4;
     
     [Header("Sub-stats")]
-    public Stat maxHealth;
+    public Stat health;
     public Stat armor;
     public Stat evasion;
     public Stat damage;
@@ -24,7 +24,7 @@ public class CharacterStats : MonoBehaviour
         currentHealth = GetMaxHealthValue();
     }
 
-    public virtual void DoDamge(CharacterStats targetStats)
+    public virtual void DoDamage(CharacterStats targetStats)
     {
         if (TargetCanAvoidAttack(targetStats))
             return;
@@ -84,6 +84,6 @@ public class CharacterStats : MonoBehaviour
 
     public int GetMaxHealthValue()
     {
-        return maxHealth.GetValue() + vitality.GetValue() * 4;
+        return health.GetValue() + vitality.GetValue() * 4;
     }
 }

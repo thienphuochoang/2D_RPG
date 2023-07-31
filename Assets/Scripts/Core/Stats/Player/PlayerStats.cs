@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerStats : CharacterStats
 {
     private Player _player;
-    public Stat maxMana;
+    public Stat mana;
     public int currentMana { get; private set; }
     public event System.Action OnManaChanged;
 
@@ -13,8 +13,8 @@ public class PlayerStats : CharacterStats
     {
         base.Start();
         _player = GetComponent<Player>();
-        maxMana.SetDefaultValue(GetMaxManaValue());
-        currentMana = maxMana.GetValue();
+        mana.SetDefaultValue(mana.GetValue() + GetMaxManaValue());
+        currentMana = mana.GetValue();
     }
     
     public virtual void DoMagicalDamage(CharacterStats targetStats, Skill skill)
@@ -53,5 +53,34 @@ public class PlayerStats : CharacterStats
     {
         base.Die();
         _player.Die();
+    }
+
+    public Stat GetStat(StatType statType)
+    {
+        switch (statType)
+        {
+            case StatType.Strength:
+                return strength;
+            case StatType.Agility:
+                return agility;
+            case StatType.Intelligence:
+                return intelligence;
+            case StatType.Vitality:
+                return vitality;
+            case StatType.PhysicalDamage:
+                return damage;
+            case StatType.MagicalDamage:
+                return intelligence;
+            case StatType.Armor:
+                return armor;
+            case StatType.Evasion:
+                return evasion;
+            case StatType.Health:
+                return health;
+            case StatType.Mana:
+                return mana;
+        }
+
+        return null;
     }
 }

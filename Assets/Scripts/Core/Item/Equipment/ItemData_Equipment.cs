@@ -24,7 +24,7 @@ public class ItemData_Equipment : ItemData
     public int vitality; // Increase health by 4;
     
     [Header("Sub-stats")]
-    public int maxHealth;
+    public int health;
     public int armor;
     public int evasion;
     public int damage;
@@ -45,7 +45,7 @@ public class ItemData_Equipment : ItemData
         playerStats.intelligence.AddModifier(intelligence);
         playerStats.vitality.AddModifier(vitality);
         
-        playerStats.maxHealth.AddModifier(maxHealth);
+        playerStats.health.AddModifier(health);
         playerStats.armor.AddModifier(armor);
         playerStats.evasion.AddModifier(evasion);
         playerStats.damage.AddModifier(damage);
@@ -59,7 +59,7 @@ public class ItemData_Equipment : ItemData
         playerStats.intelligence.RemoveModifier(intelligence);
         playerStats.vitality.RemoveModifier(vitality);
         
-        playerStats.maxHealth.RemoveModifier(maxHealth);
+        playerStats.health.RemoveModifier(health);
         playerStats.armor.RemoveModifier(armor);
         playerStats.evasion.RemoveModifier(evasion);
         playerStats.damage.RemoveModifier(damage);

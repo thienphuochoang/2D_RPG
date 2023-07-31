@@ -28,6 +28,10 @@ public class InventoryManager : PersistentObject<InventoryManager>
     [SerializeField]
     private Transform _equipmentSlotParent;
     
+    [Header("Stat UI")]
+    [SerializeField]
+    private Transform _statSlotParent;
+    
     [Header("Flask Cooldown")]
     private float lastTimeUsedHPFlask;
     private float lastTimeUsedManaFlask;
@@ -38,6 +42,7 @@ public class InventoryManager : PersistentObject<InventoryManager>
     private ItemSlot_UI[] _inventoryItemSlots;
     private ItemSlot_UI[] _stashItemSlots;
     private EquipmentSlot_UI[] _equipmentItemSlots;
+    private StatSlot_UI[] _statSlots;
     protected override void Start()
     {
         base.Start();
@@ -52,6 +57,8 @@ public class InventoryManager : PersistentObject<InventoryManager>
         stashItems = new List<InventoryItem>();
         stash = new Dictionary<ItemData, InventoryItem>();
         _stashItemSlots = _stashSlotParent.GetComponentsInChildren<ItemSlot_UI>();
+        
+        _statSlots = _statSlotParent.GetComponentsInChildren<StatSlot_UI>();
         TransferStartingItemsToEquipmentItems();
     }
 
@@ -76,7 +83,6 @@ public class InventoryManager : PersistentObject<InventoryManager>
         {
             if (item.Key.equipmentType == newEquipment.equipmentType)
             {
-                Debug.Log(item.Key);
                 oldEquipment = item.Key;
             }
         }
@@ -136,6 +142,11 @@ public class InventoryManager : PersistentObject<InventoryManager>
         for (int i = 0; i < stashItems.Count; i++)
         {
             _stashItemSlots[i].UpdateSlot(stashItems[i]);
+        }
+        
+        for (int i = 0; i < _statSlots.Length; i++)
+        {
+            _statSlots[i].UpdateStatValueUI();
         }
     }
     public void AddItem(ItemData itemData)

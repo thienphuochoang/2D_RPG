@@ -1,12 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+public enum StatType
+{
+    Strength,
+    Agility,
+    Intelligence,
+    Vitality,
+    PhysicalDamage,
+    MagicalDamage,
+    Health,
+    Mana,
+    Armor,
+    Evasion
+}
 [System.Serializable]
 public class Stat
 {
     [SerializeField]
     private int _baseValue;
-
+    public StatType statType;
     public List<int> modifiers;
     public int GetValue()
     {
