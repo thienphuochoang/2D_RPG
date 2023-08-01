@@ -155,7 +155,8 @@ public class InventoryManager : PersistentObject<InventoryManager>
         {
             case ItemType.Equipment:
             {
-                AddToInventory(itemData);
+                if (CanAddItem())
+                    AddToInventory(itemData);
                 break;
             }
             case ItemType.Material:
@@ -276,6 +277,16 @@ public class InventoryManager : PersistentObject<InventoryManager>
                 equipedItem = item.Key;
         }
         return equipedItem;
+    }
+
+    public bool CanAddItem()
+    {
+        if (inventoryItems.Count >= _inventoryItemSlots.Length)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public void UseFlask(EquipmentType flaskType)

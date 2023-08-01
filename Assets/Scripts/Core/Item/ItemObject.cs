@@ -36,6 +36,11 @@ public class ItemObject : MonoBehaviour
 
     public void PickUpItem()
     {
+        if (InventoryManager.Instance.CanAddItem() == false && _itemData.itemType == ItemType.Equipment)
+        {
+            _rb.velocity = new Vector2(0, 7);
+            return;
+        }
         InventoryManager.Instance.AddItem(_itemData);
         Destroy(this.gameObject);
     }

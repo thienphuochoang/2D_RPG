@@ -6,13 +6,19 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemSlot_UI : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class ItemSlot_UI : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Image itemImage;
-    [SerializeField] private TextMeshProUGUI itemAmount;
+    [SerializeField] protected Image itemImage;
+    [SerializeField] protected TextMeshProUGUI itemAmount;
 
+    protected MainUI _mainUI;
     public InventoryItem item;
-    
+
+    protected virtual void Start()
+    {
+        _mainUI = GetComponentInParent<MainUI>();
+    }
+
     public void UpdateSlot(InventoryItem newItem)
     {
         item = newItem;
@@ -41,7 +47,7 @@ public class ItemSlot_UI : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        if (item.itemData != null)
+        if (item != null)
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
@@ -52,21 +58,38 @@ public class ItemSlot_UI : MonoBehaviour, IPointerDownHandler, IDragHandler, IEn
                 InventoryManager.Instance.EquipItem(item.itemData);
             }
         }
-
+        _mainUI.itemTooltipUI.HideToolTip();
     }
 
     public virtual void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("Test OnDrag");
+
     }
 
     public virtual void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("Test OnDrop");
+
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        throw new NotImplementedException();
+        
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (item != null)
+        {
+            //_mainUI.itemTooltipUI.GetComponent<RectTransform>().localPosition = new Vector3(10f, 10f, 0f);
+            _mainUI.itemTooltipUI.transform.position = this.transform.position;
+            _mainUI.itemTooltipUI.ShowToolTip(item.itemData);
+        }
+            
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (item != null)
+            _mainUI.itemTooltipUI.HideToolTip();
     }
 }

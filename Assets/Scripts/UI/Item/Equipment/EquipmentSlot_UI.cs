@@ -18,6 +18,8 @@ public class EquipmentSlot_UI : ItemSlot_UI
         if (item == null || item.itemData == null) return;
         InventoryManager.Instance.UnequipItem(item.itemData as ItemData_Equipment);
         InventoryManager.Instance.AddItem(item.itemData as ItemData_Equipment);
+        _mainUI.itemTooltipUI.HideToolTip();
         CleanUpSlot();
+        
     }
 }

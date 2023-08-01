@@ -72,4 +72,29 @@ public class ItemData_Equipment : ItemData
             effect.ExecuteEffect();
         }
     }
+
+    public override string GetDescription()
+    {
+        stringBuilder.Length = 0;
+        AddItemDescription(strength, "Strength");
+        AddItemDescription(agility, "Agility");
+        AddItemDescription(intelligence, "Intelligence");
+        AddItemDescription(vitality, "Vitality");
+        AddItemDescription(damage, "Damage");
+        AddItemDescription(health, "Health");
+        AddItemDescription(armor, "Armor");
+        AddItemDescription(evasion, "Evasion");
+        return stringBuilder.ToString();
+    }
+
+    private void AddItemDescription(int statValue, string statName)
+    {
+        if (statValue != 0)
+        {
+            if (stringBuilder.Length > 0)
+                stringBuilder.AppendLine();
+            if (statValue > 0)
+                stringBuilder.Append("+ " + statValue + " " + statName);
+        }
+    }
 }
