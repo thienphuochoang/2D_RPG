@@ -35,14 +35,17 @@ public class InventoryManager : PersistentObject<InventoryManager>
     [Header("Flask Cooldown")]
     private float lastTimeUsedHPFlask;
     private float lastTimeUsedManaFlask;
-    private float hpFlaskCooldown;
-    private float manaFlaskCooldown;
+    public float hpFlaskCooldown;
+    public float manaFlaskCooldown;
     
 
     private ItemSlot_UI[] _inventoryItemSlots;
     private ItemSlot_UI[] _stashItemSlots;
     private EquipmentSlot_UI[] _equipmentItemSlots;
     private StatSlot_UI[] _statSlots;
+
+    public event System.Action OnHPFlaskCoolDown;
+    public event System.Action OnManaFlaskCoolDown;
     protected override void Start()
     {
         base.Start();
@@ -304,6 +307,7 @@ public class InventoryManager : PersistentObject<InventoryManager>
                     hpFlaskCooldown = currentFlask.itemCooldown;
                     currentFlask.ExecuteItemEffect();
                     lastTimeUsedHPFlask = Time.time;
+                    OnHPFlaskCoolDown?.Invoke();
                 }
                 else
                 {
@@ -322,6 +326,7 @@ public class InventoryManager : PersistentObject<InventoryManager>
                     manaFlaskCooldown = currentFlask.itemCooldown;
                     currentFlask.ExecuteItemEffect();
                     lastTimeUsedManaFlask = Time.time;
+                    OnManaFlaskCoolDown?.Invoke();
                 }
                 else
                 {

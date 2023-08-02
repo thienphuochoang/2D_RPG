@@ -16,6 +16,8 @@ public class ExplosionHoleSkill : Skill
     private float _growSpeed;
     [SerializeField]
     private float _existDuration;
+
+    public event System.Action OnExplosionHoleSkillCoolDown;
     public override void Activate()
     {
         base.Activate();
@@ -24,6 +26,7 @@ public class ExplosionHoleSkill : Skill
             currentExplosionHole = Instantiate(explosionHolePrefab, spawnPoint.position, Quaternion.identity);
             ExplosionHole explosionHole = currentExplosionHole.GetComponent<ExplosionHole>();
             explosionHole.Setup(_maxSize, _growSpeed, true, _existDuration);
+            OnExplosionHoleSkillCoolDown?.Invoke();
         }
     }
 

@@ -27,6 +27,8 @@ public class PlayerStats : CharacterStats
     public void ConsumeMana(int manaCost)
     {
         currentMana -= manaCost;
+        if (currentMana <= 0)
+            currentMana = 0;
         OnManaChanged?.Invoke();
     }
     

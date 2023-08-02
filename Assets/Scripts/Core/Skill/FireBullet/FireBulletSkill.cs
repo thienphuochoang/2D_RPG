@@ -14,6 +14,8 @@ public class FireBulletSkill : Skill
     private float moveSpeed = 10;
     [SerializeField]
     private float existDuration = 2;
+
+    public event System.Action OnFireBulletSkillCoolDown;
     public override void Activate()
     {
         base.Activate();
@@ -22,6 +24,7 @@ public class FireBulletSkill : Skill
             currentBullet = Instantiate(fireBulletPrefab, spawnPoint.position, PlayerManager.Instance.player.transform.rotation);
             FireBullet bullet = currentBullet.GetComponent<FireBullet>();
             bullet.Setup(existDuration, moveSpeed);
+            OnFireBulletSkillCoolDown?.Invoke();
         }
     }
 
