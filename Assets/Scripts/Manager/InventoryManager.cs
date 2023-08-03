@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class InventoryManager : PersistentObject<InventoryManager>
+public class InventoryManager : PersistentObject<InventoryManager>, ISaveManager
 {
     [SerializeField]
     private List<InventoryItem> startingItems = new List<InventoryItem>();
@@ -37,7 +38,10 @@ public class InventoryManager : PersistentObject<InventoryManager>
     private float lastTimeUsedManaFlask;
     public float hpFlaskCooldown;
     public float manaFlaskCooldown;
-    
+
+    [Header("Inventory Database")]
+    public List<InventoryItem> loadedItems;
+    public List<ItemData_Equipment> loadedEquipments;
 
     private ItemSlot_UI[] _inventoryItemSlots;
     private ItemSlot_UI[] _stashItemSlots;
@@ -62,11 +66,31 @@ public class InventoryManager : PersistentObject<InventoryManager>
         _stashItemSlots = _stashSlotParent.GetComponentsInChildren<ItemSlot_UI>();
         
         _statSlots = _statSlotParent.GetComponentsInChildren<StatSlot_UI>();
-        TransferStartingItemsToEquipmentItems();
+        AddStartingItems();
     }
 
-    private void TransferStartingItemsToEquipmentItems()
+    private void AddStartingItems()
     {
+        if (loadedEquipments.Count > 0)
+        {
+            foreach (ItemData_Equipment item in loadedEquipments)
+            {
+                EquipItem(item);
+            }
+        }
+        
+        if (loadedItems.Count > 0)
+        {
+            foreach (InventoryItem item in loadedItems)
+            {
+                for (int i = 0; i < item.stackSize; i++)
+                {
+                    AddItem(item.itemData);
+                }
+            }
+
+            return;
+        }
         if (startingItems.Count > 0)
         {
             foreach (var startingItem in startingItems)
@@ -335,5 +359,66 @@ public class InventoryManager : PersistentObject<InventoryManager>
                 break;
             }
         }
+    }
+
+    public void LoadData(GameData gameData)
+    {
+        foreach (KeyValuePair<string, int> pair in gameData.inventory)
+        {
+            foreach (var item in GetItemDatabase())
+            {
+                if (item != null && item.itemID == pair.Key)
+                {
+                    InventoryItem itemToLoad = new InventoryItem(item);
+                    itemToLoad.stackSize = pair.Value;
+                    loadedItems.Add(itemToLoad);
+                }
+            }
+        }
+
+        foreach (string loadedItemID in gameData.equipmentID)
+        {
+            foreach (var item in GetItemDatabase())
+            {
+                if (item != null && loadedItemID == item.itemID)
+                {
+                    loadedEquipments.Add(item as ItemData_Equipment);
+                }
+            }
+        }
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        gameData.inventory.Clear();
+        gameData.equipmentID.Clear();
+        foreach (KeyValuePair<ItemData, InventoryItem> pair in inventory)
+        {
+            gameData.inventory.Add(pair.Key.itemID, pair.Value.stackSize);
+        }
+        
+        foreach (KeyValuePair<ItemData, InventoryItem> pair in stash)
+        {
+            gameData.inventory.Add(pair.Key.itemID, pair.Value.stackSize);
+        }
+        
+        foreach (KeyValuePair<ItemData_Equipment, InventoryItem> pair in equipment)
+        {
+            gameData.equipmentID.Add(pair.Key.itemID);
+        }
+    }
+
+    private List<ItemData> GetItemDatabase()
+    {
+        List<ItemData> itemDatabase = new List<ItemData>();
+        string[] assetNames = AssetDatabase.FindAssets("t:ItemData", new[] { "Assets/ScriptableObjects/Items" });
+        foreach (string SOName in assetNames)
+        {
+            string SOPath = AssetDatabase.GUIDToAssetPath(SOName);
+            ItemData itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOPath);
+            itemDatabase.Add(itemData);
+        }
+
+        return itemDatabase;
     }
 }

@@ -5,10 +5,13 @@ using UnityEngine;
 public class GameData
 {
     public int coins;
-
+    public SerializableDictionary<string, int> inventory;
+    public List<string> equipmentID;
     public GameData()
     {
         this.coins = 0;
+        inventory = new SerializableDictionary<string, int>();
+        equipmentID = new List<string>();
     }
     
 }

@@ -9,11 +9,12 @@ public class SaveManager : PersistentObject<SaveManager>
     [SerializeField] private string fileName;
     private List<ISaveManager> _saveManager;
     private FileDataHandler _dataHandler;
+    [SerializeField] private bool _wantToEncryptData = false;
 
     protected override void Start()
     {
         base.Start();
-        _dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        _dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, _wantToEncryptData);
         _saveManager = FindAllSaveManagers();
         LoadGame();
     }

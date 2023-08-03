@@ -39,13 +39,28 @@ public class CraftWindow_UI : MonoBehaviour
             {
                 Debug.LogWarning("You have more materials amount than you have material slots in craft window");
             }
-
+            
+            TextMeshProUGUI materialSlotText = materialImages[i].GetComponentInChildren<TextMeshProUGUI>();
+            if (InventoryManager.Instance.stash.TryGetValue(data.craftingMaterials[i].itemData, out InventoryItem stashValue))
+            {
+                if (stashValue.stackSize < data.craftingMaterials[i].stackSize)
+                {
+                    materialSlotText.text = stashValue.stackSize.ToString() + "/" + data.craftingMaterials[i].stackSize.ToString();
+                    materialSlotText.color = Color.red;
+                }
+                else
+                {
+                    materialSlotText.text = stashValue.stackSize.ToString() + "/" + data.craftingMaterials[i].stackSize.ToString();
+                    materialSlotText.color = Color.white;
+                }
+            }
+            else
+            {
+                materialSlotText.text = "0" + "/" + data.craftingMaterials[i].stackSize.ToString();
+                materialSlotText.color = Color.red;
+            }
             materialImages[i].sprite = data.craftingMaterials[i].itemData.itemIcon;
             materialImages[i].color = Color.white;
-
-            TextMeshProUGUI materialSlotText = materialImages[i].GetComponentInChildren<TextMeshProUGUI>();
-            materialSlotText.text = data.craftingMaterials[i].stackSize.ToString();
-            materialSlotText.color = Color.white;
         }
 
         _itemIcon.sprite = data.itemIcon;

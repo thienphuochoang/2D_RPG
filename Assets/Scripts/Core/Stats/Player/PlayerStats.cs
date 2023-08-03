@@ -13,7 +13,7 @@ public class PlayerStats : CharacterStats
     {
         base.Start();
         _player = GetComponent<Player>();
-        mana.SetDefaultValue(mana.GetValue() + GetMaxManaValue());
+        mana.SetDefaultValue(GetMaxManaValue());
         currentMana = mana.GetValue();
     }
     
