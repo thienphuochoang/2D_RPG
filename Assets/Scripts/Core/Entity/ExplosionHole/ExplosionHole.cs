@@ -28,6 +28,7 @@ public class ExplosionHole : MonoBehaviour
         _growSpeed = growSpeed;
         _canGrow = canGrow;
         _existDuration = existDuration;
+        AudioManager.Instance.PlaySFX(7);
     }
     private void Update()
     {
@@ -48,6 +49,7 @@ public class ExplosionHole : MonoBehaviour
         {
             _canGrow = false;
             _animator.SetTrigger(IsExplode);
+            AudioManager.Instance.StopSFX(7);
             Invoke(nameof(SelfDestroy), 0.5f);
         }
     }

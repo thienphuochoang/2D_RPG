@@ -81,4 +81,15 @@ public class FileDataHandler
 
         return modifiedData;
     }
+
+    public void Delete()
+    {
+        Debug.Log(dataDirectoryPath);
+        Debug.Log(dataFileName);
+        string fullPath = Path.Combine(dataDirectoryPath, dataFileName);
+        if (File.Exists(fullPath))
+        {
+            File.Delete(fullPath);
+        }
+    }
 }

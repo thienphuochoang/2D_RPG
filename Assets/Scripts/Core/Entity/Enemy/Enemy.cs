@@ -115,7 +115,6 @@ public class Enemy : Entity
         base.OnDrawGizmos();
         Gizmos.color = Color.red;
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + playerCheckDistance * facingDirection, wallCheck.position.y));
-        
     }
     public void TriggerAnimation() => stateMachine.currentState.FinishAnimationTrigger();
 }

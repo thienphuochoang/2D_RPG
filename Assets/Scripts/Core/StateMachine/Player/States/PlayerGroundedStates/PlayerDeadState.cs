@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class PlayerDeadState : PlayerState
@@ -11,6 +12,7 @@ public class PlayerDeadState : PlayerState
     public override void BeginState()
     {
         base.BeginState();
+        GameObject.Find("GameMainUI").GetComponent<MainUI>().SwitchToDeadCharacterUI();
     }
 
     public override void UpdateState()

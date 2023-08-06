@@ -41,7 +41,9 @@ public class Entity : MonoBehaviour
     [SerializeField]
     protected Vector2 criticalKnockbackDirection;
     protected bool isKnocked;
-    
+
+    public int knockBackDir { get; private set; }
+
 
     public bool IsGroundedDetected() =>Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, groundLayerMask);
     public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, wallCheckDistance, groundLayerMask);
@@ -63,6 +65,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
+
     }
 
     public virtual void Flip()
@@ -112,15 +115,24 @@ public class Entity : MonoBehaviour
     protected virtual IEnumerator HitKnockBack()
     {
         isKnocked = true;
-        rb.velocity = new Vector2(knockbackDirection.x * -facingDirection, knockbackDirection.y);
+        rb.velocity = new Vector2(knockbackDirection.x * knockBackDir, knockbackDirection.y);
         yield return new WaitForSeconds(knockbackDuration);
         isKnocked = false;
     }
+
+    public virtual void SetupKnockBackDir(Transform damageDir)
+    {
+        if (damageDir.position.x > transform.position.x)
+            knockBackDir = -1;
+        else if (damageDir.position.x < transform.position.x)
+            knockBackDir = 1;
+    }
+    
     
     protected virtual IEnumerator CriticalHitKnockBack()
     {
         isKnocked = true;
-        rb.velocity = new Vector2(criticalKnockbackDirection.x * -facingDirection, criticalKnockbackDirection.y);
+        rb.velocity = new Vector2(criticalKnockbackDirection.x * knockBackDir, criticalKnockbackDirection.y);
         yield return new WaitForSeconds(criticalKnockbackDuration);
         isKnocked = false;
     }

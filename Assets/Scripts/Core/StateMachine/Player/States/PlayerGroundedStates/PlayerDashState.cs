@@ -13,6 +13,7 @@ public class PlayerDashState : PlayerState
     {
         base.BeginState();
         stateTimer = player.dashDuration;
+        player.stats.MakeInvincible(true);
         player.SetVelocity(player.dashSpeed * player.dashDirection, rb.velocity.y);
     }
 
@@ -26,5 +27,6 @@ public class PlayerDashState : PlayerState
     public override void EndState()
     {
         base.EndState();
+        player.stats.MakeInvincible(false);
     }
 }

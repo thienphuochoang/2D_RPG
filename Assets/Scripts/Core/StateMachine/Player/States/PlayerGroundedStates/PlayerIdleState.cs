@@ -11,6 +11,7 @@ public class PlayerIdleState : PlayerGroundedState
     public override void BeginState()
     {
         base.BeginState();
+        AudioManager.Instance.StopSFX(9);
         player.ResetZeroVelocity();
     }
 

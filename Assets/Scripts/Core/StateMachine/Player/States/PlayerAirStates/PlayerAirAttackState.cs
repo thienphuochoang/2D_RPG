@@ -15,6 +15,10 @@ public class PlayerAirAttackState : PlayerState
     {
         base.BeginState();
         xInput = 0;
+        if (airComboCounter == 0 || airComboCounter > 1)
+            AudioManager.Instance.PlaySFX(5);
+        else
+            AudioManager.Instance.PlaySFX(6);
         if (airComboCounter > 1 || Time.time >= lastTimeAttacked + comboWindow)
             airComboCounter = 0;
         

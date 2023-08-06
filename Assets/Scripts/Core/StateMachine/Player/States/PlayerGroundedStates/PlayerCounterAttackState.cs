@@ -25,11 +25,18 @@ public class PlayerCounterAttackState : PlayerState
             Physics2D.OverlapCircleAll(player.attackCheck.position, player.attackCheckRadius);
         foreach (Collider2D hitObj in colliders)
         {
+            if (hitObj.GetComponent<ProjectileController>() != null)
+            {
+                hitObj.GetComponent<ProjectileController>().FlipProjectile();
+                stateTimer = 10f;
+                player.animator.SetBool(SuccessfulCounterAttack, true);
+            }
             if (hitObj.GetComponent<Enemy>() != null)
             {
                 Enemy enemy = hitObj.GetComponent<Enemy>();
                 if (enemy.CanBeStunned())
                 {
+                    player.GetComponent<PlayerStats>().DoDamage(enemy.GetComponent<EnemyStats>());
                     stateTimer = 10f;
                     player.animator.SetBool(SuccessfulCounterAttack, true);
                 }

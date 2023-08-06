@@ -14,7 +14,7 @@ public class EnemyGroundedState : EnemyState
     public override void BeginState()
     {
         base.BeginState();
-        player = GameObject.FindWithTag("Player").transform;
+        player = PlayerManager.Instance.player.transform;
     }
 
     public override void UpdateState()

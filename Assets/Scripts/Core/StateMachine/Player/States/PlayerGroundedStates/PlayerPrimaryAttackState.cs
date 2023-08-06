@@ -15,6 +15,12 @@ public class PlayerPrimaryAttackState : PlayerState
     public override void BeginState()
     {
         base.BeginState();
+        if (comboCounter == 0 || comboCounter > 2)
+            AudioManager.Instance.PlaySFX(0);
+        else if (comboCounter == 1)
+            AudioManager.Instance.PlaySFX(1);
+        else if (comboCounter == 2)
+            AudioManager.Instance.PlaySFX(2);
         if (comboCounter > 2 || Time.time >= lastTimeAttacked + comboWindow)
             comboCounter = 0;
         

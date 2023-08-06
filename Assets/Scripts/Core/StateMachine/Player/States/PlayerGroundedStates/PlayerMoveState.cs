@@ -12,6 +12,7 @@ public class PlayerMoveState : PlayerGroundedState
     public override void BeginState()
     {
         base.BeginState();
+        AudioManager.Instance.PlaySFX(9);
     }
 
     public override void UpdateState()

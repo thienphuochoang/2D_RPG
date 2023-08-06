@@ -65,10 +65,12 @@ public class Player : Entity
         col = GetComponent<CapsuleCollider2D>();
         stateMachine.Initialize(idleState);
     }
-
+    
     protected override void Update()
     {
         base.Update();
+        if (Time.timeScale == 0)
+            return;
         stateMachine.currentState.UpdateState();
         CheckForDashInput();
         if (Input.GetKeyDown(KeyCode.Z))

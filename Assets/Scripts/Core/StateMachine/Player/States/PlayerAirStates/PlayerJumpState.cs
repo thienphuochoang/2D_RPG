@@ -10,6 +10,7 @@ public class PlayerJumpState : PlayerAirState
     public override void BeginState()
     {
         base.BeginState();
+        AudioManager.Instance.PlaySFX(3);
         rb.velocity = new Vector2(rb.velocity.x, player.jumpForce);
     }
 

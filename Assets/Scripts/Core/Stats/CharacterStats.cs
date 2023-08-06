@@ -17,6 +17,7 @@ public class CharacterStats : MonoBehaviour
     public Stat damage;
     public int currentHealth { get; private set; }
     public bool isDead { get; private set; }
+    public bool isInvincible { get; private set; }
     public event System.Action OnHealthChanged;
 
     protected virtual void Start()
@@ -28,6 +29,7 @@ public class CharacterStats : MonoBehaviour
     {
         if (TargetCanAvoidAttack(targetStats))
             return;
+        targetStats.GetComponent<Entity>().SetupKnockBackDir(transform);
         int totalDamage = damage.GetValue() + strength.GetValue();
         totalDamage = CheckTargetArmor(targetStats, totalDamage);
         targetStats.TakeDamage(totalDamage);
@@ -54,7 +56,7 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void TakeDamage(int inputDamage)
     {
-        if (isDead) return;
+        if (isDead || isInvincible) return;
         DecreaseHealthBy(inputDamage);
         if (currentHealth <= 0)
         {
@@ -81,6 +83,14 @@ public class CharacterStats : MonoBehaviour
     {
         isDead = true;
     }
+
+    public void KillEntity()
+    {
+        if (!isDead)
+            Die();
+    }
+
+    public void MakeInvincible(bool inputIsInvincible) => isInvincible = inputIsInvincible;
 
     public int GetMaxHealthValue()
     {

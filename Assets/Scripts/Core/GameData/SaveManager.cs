@@ -6,7 +6,7 @@ using UnityEngine;
 public class SaveManager : PersistentObject<SaveManager>
 {
     private GameData _gameData;
-    [SerializeField] private string fileName;
+    private string fileName = "Autosave.save";
     private List<ISaveManager> _saveManager;
     private FileDataHandler _dataHandler;
     [SerializeField] private bool _wantToEncryptData = false;
@@ -34,7 +34,6 @@ public class SaveManager : PersistentObject<SaveManager>
         {
             save.LoadData(_gameData);
         }
-        Debug.Log("Loaded coins: " + _gameData.coins);
     }
 
     public void SaveGame()
@@ -43,18 +42,33 @@ public class SaveManager : PersistentObject<SaveManager>
         {
             save.SaveData(ref _gameData);
         }
-        Debug.Log("Saved coins: " + _gameData.coins);
         _dataHandler.Save(_gameData);
+    }
+
+    public void DeleteSaveData()
+    {
+        _dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, _wantToEncryptData);
+        _dataHandler.Delete();
     }
 
     protected override void OnApplicationQuit()
     {
         base.OnApplicationQuit();
-        SaveGame();
+        //SaveGame();
     }
     private List<ISaveManager> FindAllSaveManagers()
     {
         IEnumerable<ISaveManager> saveManagersList = FindObjectsOfType<MonoBehaviour>().OfType<ISaveManager>();
         return new List<ISaveManager>(saveManagersList);
+    }
+
+    public bool HasSavedData()
+    {
+        if (_dataHandler.Load() != null)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

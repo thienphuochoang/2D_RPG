@@ -12,6 +12,7 @@ public class FireBullet : MonoBehaviour
     {
         _existTime = existTime;
         _moveSpeed = moveSpeed;
+        AudioManager.Instance.PlaySFX(8);
     }
 
     private void Update()
