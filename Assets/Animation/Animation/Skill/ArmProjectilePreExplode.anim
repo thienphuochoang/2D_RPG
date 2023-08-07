@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MeleeAttack
+  m_Name: ArmProjectilePreExplode
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,24 +20,26 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 1934363113, guid: 79724727b24c9af408823aaca4f0d44d, type: 3}
-    - time: 0.1
-      value: {fileID: 58289285, guid: 79724727b24c9af408823aaca4f0d44d, type: 3}
-    - time: 0.2
-      value: {fileID: -1034074739, guid: 79724727b24c9af408823aaca4f0d44d, type: 3}
-    - time: 0.3
-      value: {fileID: 1137392569, guid: 79724727b24c9af408823aaca4f0d44d, type: 3}
-    - time: 0.4
-      value: {fileID: -995451928, guid: 79724727b24c9af408823aaca4f0d44d, type: 3}
+      value: {fileID: -1723398574, guid: 098a31b6ddb0a794cb43733baf633b54, type: 3}
+    - time: 0.125
+      value: {fileID: -952439678, guid: 098a31b6ddb0a794cb43733baf633b54, type: 3}
+    - time: 0.25
+      value: {fileID: 1135814572, guid: 098a31b6ddb0a794cb43733baf633b54, type: 3}
+    - time: 0.375
+      value: {fileID: 221979922, guid: 098a31b6ddb0a794cb43733baf633b54, type: 3}
     - time: 0.5
-      value: {fileID: 475012713, guid: 79724727b24c9af408823aaca4f0d44d, type: 3}
-    - time: 0.6
-      value: {fileID: -216730243, guid: 79724727b24c9af408823aaca4f0d44d, type: 3}
+      value: {fileID: 980603975, guid: 3d3564ce4f5d6654cafe30da77741047, type: 3}
+    - time: 0.625
+      value: {fileID: 1609338587, guid: 3d3564ce4f5d6654cafe30da77741047, type: 3}
+    - time: 0.75
+      value: {fileID: -239556542, guid: 3d3564ce4f5d6654cafe30da77741047, type: 3}
+    - time: 0.875
+      value: {fileID: 971380678, guid: 3d3564ce4f5d6654cafe30da77741047, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 10
+  m_SampleRate: 8
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -52,24 +54,25 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 1934363113, guid: 79724727b24c9af408823aaca4f0d44d, type: 3}
-    - {fileID: 58289285, guid: 79724727b24c9af408823aaca4f0d44d, type: 3}
-    - {fileID: -1034074739, guid: 79724727b24c9af408823aaca4f0d44d, type: 3}
-    - {fileID: 1137392569, guid: 79724727b24c9af408823aaca4f0d44d, type: 3}
-    - {fileID: -995451928, guid: 79724727b24c9af408823aaca4f0d44d, type: 3}
-    - {fileID: 475012713, guid: 79724727b24c9af408823aaca4f0d44d, type: 3}
-    - {fileID: -216730243, guid: 79724727b24c9af408823aaca4f0d44d, type: 3}
+    - {fileID: -1723398574, guid: 098a31b6ddb0a794cb43733baf633b54, type: 3}
+    - {fileID: -952439678, guid: 098a31b6ddb0a794cb43733baf633b54, type: 3}
+    - {fileID: 1135814572, guid: 098a31b6ddb0a794cb43733baf633b54, type: 3}
+    - {fileID: 221979922, guid: 098a31b6ddb0a794cb43733baf633b54, type: 3}
+    - {fileID: 980603975, guid: 3d3564ce4f5d6654cafe30da77741047, type: 3}
+    - {fileID: 1609338587, guid: 3d3564ce4f5d6654cafe30da77741047, type: 3}
+    - {fileID: -239556542, guid: 3d3564ce4f5d6654cafe30da77741047, type: 3}
+    - {fileID: 971380678, guid: 3d3564ce4f5d6654cafe30da77741047, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.70000005
+    m_StopTime: 1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 0
+    m_LoopTime: 1
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
@@ -84,15 +87,15 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.6
-    functionName: TriggerAttack
+  - time: 0.5
+    functionName: Explode
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.7
-    functionName: TriggerAnimation
+  - time: 1
+    functionName: SelfDestroy
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

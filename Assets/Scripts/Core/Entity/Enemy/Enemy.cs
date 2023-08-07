@@ -19,7 +19,7 @@ public class Enemy : Entity
     [SerializeField]
     private LayerMask playerLayerMask;
 
-    [Header("Attack info")] 
+    [Header("Melee Attack info")] 
     public float attackDistance;
     public float attackCooldown;
     [HideInInspector]

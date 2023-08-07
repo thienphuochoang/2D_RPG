@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
-    [SerializeField] private int _damage;
-    [SerializeField] private string targetLayerName = "Player";
+    private string targetLayerName = "Player";
     private Vector2 _shootingDirection;
-    [SerializeField] private float _xVelocity;
-    [SerializeField] private Rigidbody2D _rb;
-    [SerializeField] private bool _flipped;
+    private Rigidbody2D _rb;
+    private bool _flipped;
     private CharacterStats _enemyFlyingEyeStats;
     private void Start()
     {
