@@ -10,35 +10,51 @@ public class ProjectileController : MonoBehaviour
     private Rigidbody2D _rb;
     private bool _flipped;
     private CharacterStats _enemyFlyingEyeStats;
+    private Animator _animator;
+    private bool _canMove = true;
+    private Enemy_FlyingEye _enemyFlyingEye;
     private void Start()
     {
+        _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        _rb.velocity = _shootingDirection;
+        if (_canMove)
+            _rb.velocity = _shootingDirection;
     }
 
     public void SetupProjectile(Vector2 shootingDir, CharacterStats enemyFlyingEyeStats)
     {
         _shootingDirection = shootingDir;
         _enemyFlyingEyeStats = enemyFlyingEyeStats;
+        _enemyFlyingEye = _enemyFlyingEyeStats.GetComponent<Enemy_FlyingEye>();
+        if (_enemyFlyingEye.facingDirection == -1)
+            this.transform.Rotate(0,180,0);
     }
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.layer == LayerMask.NameToLayer(targetLayerName))
         {
-            //col.GetComponent<CharacterStats>()?.TakeDamage(_damage);
+            HitCollision();
             _enemyFlyingEyeStats.DoDamage(col.GetComponent<CharacterStats>());
-            Destroy(this.gameObject);
         }
         else if (col.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            Destroy(this.gameObject);
+            HitCollision();
         }
     }
 
+    private void HitCollision()
+    {
+        GetComponent<BoxCollider2D>().enabled = false;
+        _canMove = false;
+        _rb.isKinematic = true;
+        _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        _animator.SetTrigger("Explode");
+    }
+    
     public void FlipProjectile()
     {
         if (_flipped)
@@ -47,5 +63,10 @@ public class ProjectileController : MonoBehaviour
         _flipped = true;
         transform.Rotate(0, 180,0);
         targetLayerName = "Enemy";
+    }
+
+    private void SelfDestroy()
+    {
+        Destroy(this.gameObject);
     }
 }

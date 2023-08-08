@@ -19,20 +19,23 @@ public class CharacterStats : MonoBehaviour
     public bool isDead { get; private set; }
     public bool isInvincible { get; private set; }
     public event System.Action OnHealthChanged;
+    public EntityEffect entityEffect { get; private set; }
 
     protected virtual void Start()
     {
         currentHealth = GetMaxHealthValue();
+        entityEffect = GetComponent<EntityEffect>();
     }
 
     public virtual void DoDamage(CharacterStats targetStats)
     {
-        if (TargetCanAvoidAttack(targetStats))
+        if (TargetCanAvoidAttack(targetStats) || targetStats.isInvincible)
             return;
         targetStats.GetComponent<Entity>().SetupKnockBackDir(transform);
         int totalDamage = damage.GetValue() + strength.GetValue();
         totalDamage = CheckTargetArmor(targetStats, totalDamage);
         targetStats.TakeDamage(totalDamage);
+        entityEffect.GenerateHitFX(targetStats.transform);
     }
 
     private int CheckTargetArmor(CharacterStats targetStats, int totalDamage)
@@ -68,6 +71,8 @@ public class CharacterStats : MonoBehaviour
     public virtual void DecreaseHealthBy(int inputDamage)
     {
         currentHealth -= inputDamage;
+        if (inputDamage > 0)
+            entityEffect.CreatePopupText(inputDamage.ToString());
         OnHealthChanged?.Invoke();
     }
     

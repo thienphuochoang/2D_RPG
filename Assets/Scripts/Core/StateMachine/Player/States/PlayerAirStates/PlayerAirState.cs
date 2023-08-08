@@ -15,19 +15,17 @@ public class PlayerAirState : PlayerState
     public override void UpdateState()
     {
         base.UpdateState();
-        
         if (Input.GetKey(KeyCode.A))
             stateMachine.ChangeState(player.airAttackState);
         
         if (player.IsWallDetected())
             stateMachine.ChangeState(player.wallSlideState);
 
-        if (rb.velocity.y == 0)
+        if (Mathf.Approximately(0, rb.velocity.y))
         {
             AudioManager.Instance.PlaySFX(4);
             stateMachine.ChangeState(player.idleState);
         }
-            
 
         if (xInput != 0)
             player.SetVelocity(player.moveSpeed * 0.8f * xInput, rb.velocity.y);

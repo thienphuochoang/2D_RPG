@@ -28,6 +28,8 @@ public class Skill : MonoBehaviour
     {
         PlayerStats playerStats = player.GetComponent<PlayerStats>();
         bool canBeActivated = coolDownTimer < 0 && playerStats.currentMana > manaCost;
+        if (canBeActivated == false)
+            player.entityEffect.CreatePopupText("On Cooldown");
         return canBeActivated;
     }
 

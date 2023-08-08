@@ -16,7 +16,7 @@ public class EnemyFlyingEyeStunnedState : EnemyState
         base.BeginState();
         _spriteRenderer = _enemy.GetComponentInChildren<SpriteRenderer>();
         _spriteRenderer.flipX = true;
-        _enemy.hitEffect.InvokeRepeating(nameof(_enemy.hitEffect.BlinkRedColor), 0, 0.1f);
+        _enemy.entityEffect.InvokeRepeating(nameof(_enemy.entityEffect.BlinkRedColor), 0, 0.1f);
         stateTimer = _enemy.stunDuration;
         _enemy.SetVelocity(-(_enemy.facingDirection * _enemy.stunDirection.x), _enemy.stunDirection.y);
     }
@@ -33,6 +33,6 @@ public class EnemyFlyingEyeStunnedState : EnemyState
         base.EndState();
         _spriteRenderer.flipX = false;
         _enemy.Flip();
-        _enemy.hitEffect.Invoke(nameof(_enemy.hitEffect.CancelRedBlink), 0);
+        _enemy.entityEffect.Invoke(nameof(_enemy.entityEffect.CancelRedBlink), 0);
     }
 }

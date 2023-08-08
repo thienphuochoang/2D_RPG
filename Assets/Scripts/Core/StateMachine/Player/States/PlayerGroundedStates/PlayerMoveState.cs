@@ -19,13 +19,13 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.UpdateState();
         player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
-        
-        if (xInput == 0 || player.IsWallDetected())
+        //Debug.Log(rb.velocity);
+        if (Mathf.Approximately(0, rb.velocity.x))
         {
             stateMachine.ChangeState(player.idleState);
         }
         
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y < -0.01)
             stateMachine.ChangeState(player.airState);
             
     }

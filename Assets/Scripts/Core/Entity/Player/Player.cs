@@ -39,6 +39,7 @@ public class Player : Entity
 
     [Header("Counter attack info")]
     public float counterAttackDuration;
+    public Transform counterAttackPoint;
 
     protected override void Awake()
     {

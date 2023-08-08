@@ -9,7 +9,7 @@ public class Entity : MonoBehaviour
 {
     public Rigidbody2D rb { get; private set; }
     public Animator animator { get; private set; }
-    public HitEffect hitEffect { get; private set; }
+    public EntityEffect entityEffect { get; private set; }
     public CharacterStats stats { get; private set; }
     public int facingDirection { get; private set; } = 1;
     private bool _facingRight = true;
@@ -55,7 +55,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void Start()
     {
-        hitEffect = GetComponent<HitEffect>();
+        entityEffect = GetComponent<EntityEffect>();
         rb = GetComponentInChildren<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         stats = GetComponent<CharacterStats>();
@@ -102,13 +102,13 @@ public class Entity : MonoBehaviour
 
     public virtual void TriggerDamageEffect()
     {
-        hitEffect.StartCoroutine(nameof(hitEffect.FlashFX));
+        entityEffect.StartCoroutine(nameof(entityEffect.FlashFX));
         StartCoroutine(nameof(HitKnockBack));
     }
 
     public virtual void CriticalDamage()
     {
-        hitEffect.StartCoroutine(nameof(hitEffect.FlashFX));
+        entityEffect.StartCoroutine(nameof(entityEffect.FlashFX));
         StartCoroutine(nameof(CriticalHitKnockBack));
     }
 

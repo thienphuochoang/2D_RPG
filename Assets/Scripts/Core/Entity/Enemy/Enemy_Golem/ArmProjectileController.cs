@@ -12,9 +12,9 @@ public class ArmProjectileController : MonoBehaviour
     private bool _flipped;
     private CharacterStats _enemyGolemStats;
     private bool _canMove = true;
-    private bool _canExplode = false;
     private Animator _animator;
     private Player _player;
+    private Enemy_Golem _enemyGolem;
     private void Start()
     {
         _animator = GetComponent<Animator>();
@@ -35,6 +35,10 @@ public class ArmProjectileController : MonoBehaviour
     {
         _shootingDirection = shootingDir;
         _enemyGolemStats = enemyGolemStats;
+        _enemyGolem = _enemyGolemStats.GetComponent<Enemy_Golem>();
+        if (_enemyGolem.facingDirection == -1)
+            this.transform.Rotate(0, 180, 0);
+        
     }
 
     private void OnTriggerStay2D(Collider2D other)

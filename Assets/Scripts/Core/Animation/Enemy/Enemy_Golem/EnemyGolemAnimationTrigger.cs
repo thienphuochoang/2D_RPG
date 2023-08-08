@@ -25,6 +25,7 @@ public class EnemyGolemAnimationTrigger : MonoBehaviour
             if (hitObj.GetComponent<Player>() != null)
             {
                 PlayerStats target = hitObj.GetComponent<PlayerStats>();
+                target.GetComponent<EntityEffect>().ShakeScreen();
                 _enemy.stats.DoDamage(target);
             }
         }

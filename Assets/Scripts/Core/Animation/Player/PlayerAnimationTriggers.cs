@@ -11,6 +11,11 @@ public class PlayerAnimationTriggers : MonoBehaviour
     {
         _thePlayer.TriggerAnimation();
     }
+
+    private void TriggerCounterFX()
+    {
+        _thePlayer.GetComponent<EntityEffect>().GenerateCounterFX(_thePlayer.counterAttackPoint);
+    }
     
     private void TriggerFireBulletProjectile()
     {

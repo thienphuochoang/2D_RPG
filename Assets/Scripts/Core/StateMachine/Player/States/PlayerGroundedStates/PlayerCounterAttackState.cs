@@ -30,6 +30,7 @@ public class PlayerCounterAttackState : PlayerState
                 hitObj.GetComponent<ProjectileController>().FlipProjectile();
                 stateTimer = 10f;
                 player.animator.SetBool(SuccessfulCounterAttack, true);
+                //player.GetComponent<EntityEffect>().GenerateCounterFX(player.transform);
             }
             if (hitObj.GetComponent<Enemy>() != null)
             {
@@ -39,6 +40,7 @@ public class PlayerCounterAttackState : PlayerState
                     player.GetComponent<PlayerStats>().DoDamage(enemy.GetComponent<EnemyStats>());
                     stateTimer = 10f;
                     player.animator.SetBool(SuccessfulCounterAttack, true);
+                    //player.GetComponent<EntityEffect>().GenerateCounterFX(player.transform);
                 }
             }
         }

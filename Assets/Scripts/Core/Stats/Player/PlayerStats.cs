@@ -49,6 +49,7 @@ public class PlayerStats : CharacterStats
     public override void TakeDamage(int inputDamage)
     {
         base.TakeDamage(inputDamage);
+        if (isInvincible || isDead) return;
         _player.TriggerDamageEffect();
     }
 

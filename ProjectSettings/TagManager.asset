@@ -47,6 +47,9 @@ TagManager:
   - name: Ground
     uniqueID: 1809621415
     locked: 0
+  - name: DeadGround
+    uniqueID: 3405636175
+    locked: 0
   - name: Checkpoint
     uniqueID: 2280438861
     locked: 0
@@ -58,4 +61,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 100050949
+    locked: 0
+  - name: FX
+    uniqueID: 3790547499
     locked: 0
