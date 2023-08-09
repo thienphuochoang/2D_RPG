@@ -20,7 +20,7 @@ public class EnemyFlyingEyeGroundedState : EnemyState
     public override void UpdateState()
     {
         base.UpdateState();
-        if (enemy.IsPlayerDetectedInConeArea() || Vector2.Distance(enemy.transform.position, player.transform.position) < 3f)
+        if (enemy.IsPlayerDetectedInHalfOfTheCircle() || Vector2.Distance(enemy.transform.position, player.transform.position) < 5f)
             stateMachine.ChangeState(enemy.battleState);
     }
 

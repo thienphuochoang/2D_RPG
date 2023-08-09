@@ -28,6 +28,10 @@ public class EntityEffect : MonoBehaviour
     [SerializeField] private GameObject _hitFX01Prefab;
     [SerializeField] private GameObject _hitFX02Prefab;
 
+    [Header("Slash FX")]
+    [SerializeField] private GameObject _slashFX01Prefab;
+    [SerializeField] private GameObject _slashFX02Prefab;
+
     [Header("Counter FX")]
     [SerializeField]
     private GameObject _counterHixFXPrefab;

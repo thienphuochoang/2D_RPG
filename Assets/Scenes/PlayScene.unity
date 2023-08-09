@@ -3258,6 +3258,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222725505}
   m_CullTransparentMesh: 1
+--- !u!1 &239552596
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 239552597}
+  m_Layer: 7
+  m_Name: SlashPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &239552597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239552596}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.1, y: 0.77, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1108228530}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &242710476
 GameObject:
   m_ObjectHideFlags: 0
@@ -6969,7 +7000,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 509261651}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.34, y: -0.27, z: 0}
+  m_LocalPosition: {x: 0.83, y: -0.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7478,7 +7509,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.9900002, y: 9, z: -10}
+  m_LocalPosition: {x: 1.7999998, y: 14.33, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11862,6 +11893,8 @@ MonoBehaviour:
   _shakePower: {x: 0, y: 0, z: 0}
   _hitFX01Prefab: {fileID: 4679206577268094390, guid: 8795a2506a014e54f9da5bff4c7c6d79, type: 3}
   _hitFX02Prefab: {fileID: 4679206577268094390, guid: 2680b2ee6b570d84eb6dd2b78f957eec, type: 3}
+  _slashFX01Prefab: {fileID: 0}
+  _slashFX02Prefab: {fileID: 0}
   _counterHixFXPrefab: {fileID: 7225414877359174778, guid: 802fca9e0d4193e42a66f33e7f5fb48c, type: 3}
   _popupTextPrefab: {fileID: 3267589466952091727, guid: 3e11ff23d9243d347a32d8b9e29e02d3, type: 3}
 --- !u!114 &753786931
@@ -14765,7 +14798,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924637052}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.9900002, y: 9, z: -10}
+  m_LocalPosition: {x: 1.7999998, y: 14.33, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17326,7 +17359,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108228528}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.99, y: 6.3, z: 0}
+  m_LocalPosition: {x: 1.8, y: 11.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17336,6 +17369,7 @@ Transform:
   - {fileID: 1980171123}
   - {fileID: 955469207}
   - {fileID: 1860040872}
+  - {fileID: 239552597}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17444,6 +17478,8 @@ MonoBehaviour:
   _shakePower: {x: 0.5, y: 0.2, z: 0}
   _hitFX01Prefab: {fileID: 4679206577268094390, guid: 8795a2506a014e54f9da5bff4c7c6d79, type: 3}
   _hitFX02Prefab: {fileID: 4679206577268094390, guid: 2680b2ee6b570d84eb6dd2b78f957eec, type: 3}
+  _slashFX01Prefab: {fileID: 7904400496369917459, guid: 760d700c3ead6834e97f6f7f977c027d, type: 3}
+  _slashFX02Prefab: {fileID: 7904400496369917459, guid: 760d700c3ead6834e97f6f7f977c027d, type: 3}
   _counterHixFXPrefab: {fileID: 7225414877359174778, guid: 802fca9e0d4193e42a66f33e7f5fb48c, type: 3}
   _popupTextPrefab: {fileID: 3267589466952091727, guid: 3e11ff23d9243d347a32d8b9e29e02d3, type: 3}
 --- !u!114 &1108228538
@@ -19668,6 +19704,8 @@ MonoBehaviour:
   _shakePower: {x: 0, y: 0, z: 0}
   _hitFX01Prefab: {fileID: 4679206577268094390, guid: 8795a2506a014e54f9da5bff4c7c6d79, type: 3}
   _hitFX02Prefab: {fileID: 4679206577268094390, guid: 2680b2ee6b570d84eb6dd2b78f957eec, type: 3}
+  _slashFX01Prefab: {fileID: 0}
+  _slashFX02Prefab: {fileID: 0}
   _counterHixFXPrefab: {fileID: 7225414877359174778, guid: 802fca9e0d4193e42a66f33e7f5fb48c, type: 3}
   _popupTextPrefab: {fileID: 3267589466952091727, guid: 3e11ff23d9243d347a32d8b9e29e02d3, type: 3}
 --- !u!50 &1143271627
@@ -24543,6 +24581,8 @@ MonoBehaviour:
   _shakePower: {x: 0, y: 0, z: 0}
   _hitFX01Prefab: {fileID: 4679206577268094390, guid: 8795a2506a014e54f9da5bff4c7c6d79, type: 3}
   _hitFX02Prefab: {fileID: 4679206577268094390, guid: 2680b2ee6b570d84eb6dd2b78f957eec, type: 3}
+  _slashFX01Prefab: {fileID: 0}
+  _slashFX02Prefab: {fileID: 0}
   _counterHixFXPrefab: {fileID: 7225414877359174778, guid: 802fca9e0d4193e42a66f33e7f5fb48c, type: 3}
   _popupTextPrefab: {fileID: 3267589466952091727, guid: 3e11ff23d9243d347a32d8b9e29e02d3, type: 3}
 --- !u!61 &1522395328
@@ -24600,7 +24640,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522395323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.63, y: 16.11, z: 0}
+  m_LocalPosition: {x: 3.67, y: 17.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24631,20 +24671,20 @@ MonoBehaviour:
     m_Bits: 64
   groundCheckDistance: 12.51
   wallCheck: {fileID: 1092014044}
-  wallCheckDistance: 2.88
+  wallCheckDistance: 1.86
   attackCheck: {fileID: 509261652}
-  attackCheckRadius: 0
+  attackCheckRadius: 0.97
   knockbackDirection: {x: 0, y: 0}
   knockbackDuration: 0.07
   criticalKnockbackDuration: 1.2
   criticalKnockbackDirection: {x: 3, y: 0}
-  moveSpeed: 2
+  moveSpeed: 2.5
   idleTime: 2
   playerCheckDistance: 0
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  attackDistance: 15
+  attackDistance: 5
   attackCooldown: 1.5
   lastTimeAttacked: 0
   battleTime: 6
@@ -24652,10 +24692,12 @@ MonoBehaviour:
   stunDirection: {x: 5, y: 0}
   counterImage: {fileID: 631203322}
   _projectilePrefab: {fileID: 7935371570568824235, guid: bda43e27e276d3a4d9acfc27ab81b7ad, type: 3}
-  _projectileSpeed: 7
-  coneAngle: 90
-  coneRange: 10
-  _player: {fileID: 1108228533}
+  viewRadius: 10
+  viewAngle: 90
+  maxHeightDistance: 2.5
+  isAlreadyFlyAway: 0
+  flyAwayCooldown: 4
+  lastTimeFlyAway: 0
 --- !u!1 &1526360120
 GameObject:
   m_ObjectHideFlags: 0

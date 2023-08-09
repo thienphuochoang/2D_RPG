@@ -49,7 +49,7 @@ public class Enemy_Golem : Enemy
     
     public void TriggerRangeAttackAnimation()
     {
-        GameObject newProjectile = Instantiate(_projectilePrefab, attackCheck.position, Quaternion.identity);
+        GameObject newProjectile = Instantiate(_projectilePrefab, _projectileShootingTransform.position, Quaternion.identity);
         Vector2 directionToPlayer = _player.transform.position - transform.position;
         //newProjectile.GetComponent<ProjectileController>().SetupProjectile(_projectileSpeed * facingDirection, stats);
         newProjectile.GetComponent<ArmProjectileController>().SetupProjectile(directionToPlayer, stats);

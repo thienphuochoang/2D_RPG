@@ -16,7 +16,7 @@ public class PlayerAnimationTriggers : MonoBehaviour
     {
         _thePlayer.GetComponent<EntityEffect>().GenerateCounterFX(_thePlayer.counterAttackPoint);
     }
-    
+
     private void TriggerFireBulletProjectile()
     {
         if (SkillManager.Instance.fireBulletSkill.CanUseSkill())
