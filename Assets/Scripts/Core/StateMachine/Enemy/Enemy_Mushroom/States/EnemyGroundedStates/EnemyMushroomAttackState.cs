@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyMushroomAttackState : EnemyState
 {
     private Enemy_Mushroom enemy;
-    private Transform _player;
     public EnemyMushroomAttackState(Enemy inputEnemy, EnemyStateMachine inputEnemyStateMachine, string inputAnimBoolName, Enemy_Mushroom enemyMushroom) : base(inputEnemy, inputEnemyStateMachine, inputAnimBoolName)
     {
         enemy = enemyMushroom;
@@ -14,7 +13,6 @@ public class EnemyMushroomAttackState : EnemyState
     public override void BeginState()
     {
         base.BeginState();
-        _player = PlayerManager.Instance.player.transform;
     }
 
     public override void UpdateState()

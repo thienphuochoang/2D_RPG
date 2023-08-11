@@ -37,6 +37,14 @@ public class PlayerAnimationTriggers : MonoBehaviour
         {
             if (hitObj.GetComponent<Enemy>() != null)
             {
+                if (hitObj.GetComponent<Enemy_Golem>() != null)
+                {
+                    if (hitObj.GetComponent<Enemy_Golem>().isBlocking)
+                    {
+                        hitObj.GetComponent<Enemy_Golem>().stats.DoDamage(_thePlayer.stats);
+                        return;
+                    }
+                }
                 EnemyStats target = hitObj.GetComponent<EnemyStats>();
                 _thePlayer.stats.DoDamage(target);
             }

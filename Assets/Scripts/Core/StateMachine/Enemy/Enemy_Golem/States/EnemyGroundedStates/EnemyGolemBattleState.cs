@@ -73,4 +73,5 @@ public class EnemyGolemBattleState : EnemyState
 
         return false;
     }
+    
 }

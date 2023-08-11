@@ -8,6 +8,8 @@ public class Enemy_Mushroom : Enemy
     public EnemyMushroomMoveState moveState { get; private set; }
     public EnemyMushroomBattleState battleState { get; private set; }
     public EnemyMushroomAttackState attackState { get; private set; }
+    public EnemyMushroomAttack02State attack02State { get; private set; }
+    public EnemyMushroomAttack03State attack03State { get; private set; }
     public EnemyMushroomStunnedState stunnedState { get; private set; }
     public EnemyMushroomDeadState deadState { get; private set; }
     protected override void Awake()
@@ -17,6 +19,8 @@ public class Enemy_Mushroom : Enemy
         moveState = new EnemyMushroomMoveState(this, stateMachine, "Move", this);
         battleState = new EnemyMushroomBattleState(this, stateMachine, "Move", this);
         attackState = new EnemyMushroomAttackState(this, stateMachine, "Attack", this);
+        attack02State = new EnemyMushroomAttack02State(this, stateMachine, "Attack02", this);
+        attack03State = new EnemyMushroomAttack03State(this, stateMachine, "Attack03", this);
         stunnedState = new EnemyMushroomStunnedState(this, stateMachine, "Stunned", this);
         deadState = new EnemyMushroomDeadState(this, stateMachine, "Die", this);
     }

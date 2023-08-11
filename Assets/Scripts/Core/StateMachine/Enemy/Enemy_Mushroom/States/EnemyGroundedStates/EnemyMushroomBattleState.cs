@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class EnemyMushroomBattleState : EnemyState
 {
@@ -29,7 +30,15 @@ public class EnemyMushroomBattleState : EnemyState
             if (_enemy.IsPlayerDetected().distance < _enemy.attackDistance)
             {
                 if (CanAttack())
-                    stateMachine.ChangeState(_enemy.attackState);
+                {
+                    int randomNumber = UnityEngine.Random.Range(0, 15);
+                    if (randomNumber <= 5)
+                        stateMachine.ChangeState(_enemy.attackState);
+                    else if (randomNumber > 5 && randomNumber <= 10)
+                        stateMachine.ChangeState(_enemy.attack02State);
+                    else if (randomNumber > 10)
+                        stateMachine.ChangeState(_enemy.attack03State);
+                }
             }
         }
         else

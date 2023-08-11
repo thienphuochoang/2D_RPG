@@ -13,21 +13,30 @@ public class EnemyGolemBlockState : EnemyState
     public override void BeginState()
     {
         base.BeginState();
+        enemy.isBlocking = true;
+        enemy.blockTimer = enemy.blockDuration;
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
-        /*enemy.ResetZeroVelocity();
-        if (animationTriggerCalled)
+        enemy.ResetZeroVelocity();
+        if (enemy.isBlocking)
         {
-            stateMachine.ChangeState(enemy.battleState);
-        }*/
+            enemy.blockTimer -= Time.deltaTime;
+            enemy.animator.SetBool("Block", true);
+            if (enemy.blockTimer <= 0)
+            {
+                stateMachine.ChangeState(enemy.battleState);
+                enemy.animator.SetBool("Block", false);
+            }
+        }
     }
 
     public override void EndState()
     {
         base.EndState();
-        //enemy.lastTimeAttacked = Time.time;
+        enemy.isBlocking = false;
+        enemy.blockHealthThreshold = 50;
     }
 }

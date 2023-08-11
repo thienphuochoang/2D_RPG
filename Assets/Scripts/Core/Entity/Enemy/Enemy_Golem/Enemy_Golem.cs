@@ -9,6 +9,13 @@ public class Enemy_Golem : Enemy
     public float laserAttackDistance;
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _projectileShootingTransform;
+    [Header("Block Info")]
+    public int blockHealthThreshold;
+    public float blockDuration = 5f; // Duration of block state in seconds
+    [HideInInspector]
+    public bool isBlocking = false;
+    [HideInInspector]
+    public float blockTimer = 0f;
     private Player _player;
     public EnemyGolemIdleState idleState { get; private set; }
     public EnemyGolemMoveState moveState { get; private set; }
@@ -35,10 +42,18 @@ public class Enemy_Golem : Enemy
         base.Start();
         stateMachine.Initialize(idleState);
         _player = PlayerManager.Instance.player;
+        stats.OnHealthThresholdChanged += CalculateHealthThreshold;
     }
     protected override void Update()
     {
         base.Update();
+    }
+
+    public void CalculateHealthThreshold(int damage)
+    {
+        blockHealthThreshold -= damage;
+        if (blockHealthThreshold <= 0)
+            stateMachine.ChangeState(blockState);
     }
 
     public override void Die()

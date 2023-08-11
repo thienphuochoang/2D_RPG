@@ -19,6 +19,7 @@ public class CharacterStats : MonoBehaviour
     public bool isDead { get; private set; }
     public bool isInvincible { get; private set; }
     public event System.Action OnHealthChanged;
+    public event System.Action<int> OnHealthThresholdChanged;
     public EntityEffect entityEffect { get; private set; }
 
     protected virtual void Start()
@@ -71,9 +72,10 @@ public class CharacterStats : MonoBehaviour
     public virtual void DecreaseHealthBy(int inputDamage)
     {
         currentHealth -= inputDamage;
-        if (inputDamage > 0)
+        if (inputDamage >= 0)
             entityEffect.CreatePopupText(inputDamage.ToString());
         OnHealthChanged?.Invoke();
+        OnHealthThresholdChanged?.Invoke(inputDamage);
     }
     
     public virtual void IncreaseHealthBy(int inputHealth)

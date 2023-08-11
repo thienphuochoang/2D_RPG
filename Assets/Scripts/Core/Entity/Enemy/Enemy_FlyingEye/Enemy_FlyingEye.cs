@@ -15,7 +15,8 @@ public class Enemy_FlyingEye : Enemy
     public float maxHeightDistance = 2f;
     public Vector3 initialPosition { get; private set; }
     public float currentMaxHeight { get; private set; }
-    public bool isAlreadyFlyAway = false;
+    //public bool isAlreadyFlyAway = false;
+    public int numberOfResetFlyAway = 2;
     public float flyAwayCooldown;
     [HideInInspector]
     public float lastTimeFlyAway;
@@ -54,15 +55,6 @@ public class Enemy_FlyingEye : Enemy
     protected override void Update()
     {
         base.Update();
-        ResetFlyAwayStatus();
-    }
-
-    private void ResetFlyAwayStatus()
-    {
-        if (stats.currentHealth < ((float)stats.GetMaxHealthValue() / 3f) && isAlreadyFlyAway)
-        {
-            isAlreadyFlyAway = false;
-        }
     }
 
     public override bool CanBeStunned()

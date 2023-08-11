@@ -15,8 +15,17 @@ public class EnemyFlyingEyeRunAwayState : EnemyState
     {
         base.BeginState();
         flyAwayPosition = enemy.transform.position;
-        flyAwayPosition.y += UnityEngine.Random.Range(3f, 6f);
-        flyAwayPosition.x += UnityEngine.Random.Range(-6f, 6f);
+        if (enemy.stats.currentHealth < ((float)enemy.stats.GetMaxHealthValue() / 3f))
+        {
+            flyAwayPosition.x += UnityEngine.Random.Range(-6f, 6f);
+        }
+        else if (enemy.stats.currentHealth < ((float)enemy.stats.GetMaxHealthValue() / 2f))
+        {
+            flyAwayPosition.x += UnityEngine.Random.Range(-6f, 6f);
+            flyAwayPosition.y += UnityEngine.Random.Range(3f, 6f);
+        }
+        
+        
     }
 
     public override void UpdateState()
@@ -33,7 +42,7 @@ public class EnemyFlyingEyeRunAwayState : EnemyState
     public override void EndState()
     {
         base.EndState();
-        enemy.isAlreadyFlyAway = true;
+        enemy.numberOfResetFlyAway -= 1;
     }
     
     private bool CanFlyAway()
