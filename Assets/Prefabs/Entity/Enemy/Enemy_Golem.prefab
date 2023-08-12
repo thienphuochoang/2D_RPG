@@ -771,7 +771,7 @@ MonoBehaviour:
   laserAttackDistance: 15
   _projectilePrefab: {fileID: 7506708336485659644, guid: dc14554ec521bb5409440b7caffd5576, type: 3}
   _projectileShootingTransform: {fileID: 1351155934146977619}
-  blockHealthThreshold: 50
+  blockHealthThreshold: 100
   blockDuration: 5
   isBlocking: 0
   blockTimer: 0

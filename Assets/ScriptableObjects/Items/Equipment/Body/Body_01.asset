@@ -10,26 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcc188d9691cbc246aae5377bac63d6e, type: 3}
-  m_Name: Head_01
+  m_Name: Body_01
   m_EditorClassIdentifier: 
-  itemID: 9d4737dc78fe81c418f510095d30e61e
+  itemID: 90158308a297be443a15abfa4b71203b
   itemType: 1
-  itemName: Head_01
-  itemIcon: {fileID: 21300000, guid: 73637c9c6067cba48b8159606ca60059, type: 3}
-  dropChance: 77
-  equipmentType: 1
+  itemName: Body_01
+  itemIcon: {fileID: 21300000, guid: a2337fca603cf564a9c2bac71d14701d, type: 3}
+  dropChance: 0
+  equipmentType: 2
   strength: 2
-  agility: 0
-  intelligence: 0
+  agility: 2
+  intelligence: 2
   vitality: 2
-  health: 0
+  health: 10
   armor: 2
-  evasion: 0
+  evasion: 10
   damage: 0
   itemEffects: []
   itemCooldown: 0
   craftingMaterials:
-  - itemData: {fileID: 11400000, guid: 59e61d7136c12824e97f478be9c69140, type: 2}
-    stackSize: 2
   - itemData: {fileID: 11400000, guid: 99f812a0d2ec1904cb8849e380fc08f3, type: 2}
+    stackSize: 1
+  - itemData: {fileID: 11400000, guid: 59e61d7136c12824e97f478be9c69140, type: 2}
     stackSize: 2

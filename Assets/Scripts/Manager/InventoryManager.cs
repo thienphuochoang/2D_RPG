@@ -42,12 +42,14 @@ public class InventoryManager : PersistentObject<InventoryManager>, ISaveManager
     [Header("Inventory Database")]
     public List<InventoryItem> loadedItems;
     public List<ItemData_Equipment> loadedEquipments;
+    
 
     private ItemSlot_UI[] _inventoryItemSlots;
     private ItemSlot_UI[] _stashItemSlots;
     private EquipmentSlot_UI[] _equipmentItemSlots;
     private StatSlot_UI[] _statSlots;
 
+    
     public event System.Action OnHPFlaskCoolDown;
     public event System.Action OnManaFlaskCoolDown;
     protected override void Start()

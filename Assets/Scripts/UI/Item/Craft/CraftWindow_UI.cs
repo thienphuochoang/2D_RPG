@@ -11,7 +11,9 @@ public class CraftWindow_UI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _itemDescription;
     [SerializeField] private Image _itemIcon;
     [SerializeField] private Button _craftButton;
-
+    [SerializeField] private GameObject _craftInformationUI;
+    [SerializeField] private TextMeshProUGUI _craftTextInformation;
+    
     [SerializeField] private Image[] materialImages;
 
     private void EnableAllSubWindows(GameObject parentGameObject)
@@ -66,7 +68,23 @@ public class CraftWindow_UI : MonoBehaviour
         _itemIcon.sprite = data.itemIcon;
         _itemName.text = data.itemName;
         _itemDescription.text = data.GetDescription();
-        
-        _craftButton.onClick.AddListener(() => InventoryManager.Instance.CanCraft(data, data.craftingMaterials));
+
+        _craftButton.onClick.AddListener(() => CraftEquipment(data));
+    }
+
+    private void CraftEquipment(ItemData_Equipment data)
+    {
+        if (InventoryManager.Instance.CanCraft(data, data.craftingMaterials))
+        {
+            _craftTextInformation.text = "Craft Successfully!";
+            _craftTextInformation.color = Color.green;
+            _craftInformationUI.SetActive(true);
+        }
+        else
+        {
+            _craftTextInformation.text = "Not enough materials!";
+            _craftTextInformation.color = Color.red;
+            _craftInformationUI.SetActive(true);
+        }
     }
 }

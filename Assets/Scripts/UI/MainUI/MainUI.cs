@@ -12,6 +12,7 @@ public class MainUI : MonoBehaviour
     public InGame_UI inGameUI;
     public GameObject mainMenuUI;
     public GameObject pauseGameUI;
+    public GameObject craftInformationUI;
 
     [Header("Dead Character Screen")]
     [SerializeField]

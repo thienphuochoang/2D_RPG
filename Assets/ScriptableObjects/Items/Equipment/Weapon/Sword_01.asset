@@ -12,15 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc188d9691cbc246aae5377bac63d6e, type: 3}
   m_Name: Sword_01
   m_EditorClassIdentifier: 
+  itemID: 4c815635e1b33644e9bbb859a9c6748c
   itemType: 1
   itemName: Sword_01
   itemIcon: {fileID: 21300000, guid: a2bab91253b967b48a5613cf4fa43e23, type: 3}
+  dropChance: 56
   equipmentType: 0
   strength: 3
   agility: 3
   intelligence: 0
   vitality: 2
-  maxHealth: 5
+  health: 0
   armor: 0
   evasion: 0
   damage: 8
+  itemEffects: []
+  itemCooldown: 0
+  craftingMaterials:
+  - itemData: {fileID: 11400000, guid: 1149c64305152434c9c454239b6c5bb8, type: 2}
+    stackSize: 3
